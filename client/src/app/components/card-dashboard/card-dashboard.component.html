@@ -1,0 +1,34 @@
+<div 
+	class="card-dashboard" 
+	[ngClass]="{
+		'leads':data.icons == 'leads',
+		'active':data.icons == 'active',
+		'no-purchase':data.icons == 'no-purchase',
+		'sales':data.icons == 'sales'
+	}"
+	
+>
+    <h4  [ngStyle]="{'color':data.color}" style="cursor: pointer;" class="text-capitalize">{{data.title}} <span [countUp]="data.total">0</span>{{data.key}}</h4>
+
+    <div *ngIf=data.data>
+
+
+    	<div class="text-capitalize mt-1" *ngFor="let indicator of data.data; let i = index" style="cursor: pointer;">
+
+    		<div *ngIf="indicator.type && indicator.type == 'normal'">
+    			<p style="font-size:10px; margin-bottom: 2px;">{{indicator.value}} {{indicator.key}} - {{((100 * indicator.value) / data.total) |  number:'1.0-0'}}% </p>
+					<app-progress-bar [percentage]="(100 * indicator.value) / data.total" [color]="indicator.color"></app-progress-bar>
+    		</div>
+
+    		<div *ngIf="indicator.type == 'percentage'">
+
+    			<p style="font-size:10px; margin-bottom: 2px;">{{indicator.key}} - {{indicator.value | number:'1.0-0'}}% </p>
+					<app-progress-bar [percentage]="indicator.value" [color]="indicator.color"></app-progress-bar>
+    		</div>
+				
+			</div>
+    </div>
+
+	
+</div>
+

@@ -1,0 +1,23 @@
+<div id="discover">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<app-search-bar></app-search-bar>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<div class="title-section">
+					{{collection.name}}
+				</div>
+			</div>
+			
+		</div>
+
+		<app-group (scroll)="onScroll()" [articles]="articles" [collections]="collections" *ngIf="articles"></app-group>	
+		
+	</div>
+
+</div>

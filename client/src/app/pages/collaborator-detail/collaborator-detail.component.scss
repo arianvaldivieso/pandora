@@ -1,0 +1,51 @@
+.chevron-back {
+	height: 20px;
+	margin: 32px 0;
+	cursor: pointer;
+}
+
+.collaborator-image {
+	height: 160px;
+	min-width: 130px;
+	background-size: contain;
+	background-position: center;
+	border-radius: 6px;
+	background-repeat: no-repeat;
+}
+
+.collaborator-name {
+	margin-top: 0;
+	small {
+		color: #adadad;
+	}
+}
+
+.marker {
+	height: 20px;
+	position: relative;
+	top: -3px;
+}
+
+.collaborator-info {
+	color: #00c6aa;
+}
+
+
+.collaborator-industries{
+	display: flex;
+  align-items: center;
+}
+
+.bottom-info {
+	bottom: 0;
+	margin: 0;
+	color: #adadad;
+}
+
+.btn-wz {
+	background-color: #00c6aa;
+	color: #fff !important;
+	&:active {
+		background-color: #749893;
+	}
+}

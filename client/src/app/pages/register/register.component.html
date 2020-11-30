@@ -1,0 +1,112 @@
+<div id="register">
+	
+	<div class="container container-max">
+		<div class="row align-items-center">
+			<div class="col-xl-4 p-0">
+				<app-presentation></app-presentation>
+			</div>
+			<div class="col-xl-8 p-0 d-flex flex-column justify-content-between">
+				
+				<div class="row d-flex justify-content-center align-items-center">
+					
+						<div class="col-xl-5">
+							<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate class="custom-form">
+								<div class="form-title">HEY! <img src="/assets/images/hey.svg" alt="hey - wizer"></div>
+								<div class="row">
+									<div class="col-12">
+										<div class="alert alert-danger" role="alert" *ngIf="showError">
+										  Check your credentials
+										</div>
+									</div>
+								</div>	
+								<div class="row">
+
+									{{client_id.value}}
+
+
+									<div class="col-xl-12 col-12">
+
+										<mat-form-field class="w-100">
+										  <mat-label>Cliente</mat-label>
+									    <mat-select formControlName="client_id">
+										    <mat-option *ngFor="let client of clients" [value]="client.id">{{client.cliente}}</mat-option>
+										  </mat-select>
+
+										  <div class="invalid-feedback d-block" *ngIf="(client_id.dirty || client_id.touched) && client_id.invalid && client_id.errors.required">
+								        El cliente es requerido!
+								      </div>
+										</mat-form-field>
+							    </div>
+
+									<div class="col-xl-12 col-12">
+							    	<div class="form-group">
+								      <label for="name" class="m-0">Nombre</label>
+								      <input 
+								      	type="text" 
+								      	formControlName="name" 
+								      	class="form-control" 
+								      	id="name" 
+								      	placeholder="Nombre"
+								      	[ngClass]="{'invalid':(name.dirty || name.touched) && name.invalid && name.errors.required}"
+								      >
+								      <div class="invalid-feedback d-block" *ngIf="(name.dirty || name.touched) && name.invalid && name.errors.required">
+								        el nombre es requerido!
+								      </div>
+								     </div>
+							    </div>
+
+
+
+							    <div class="col-12">
+							    	<div class="form-group">
+								      <label for="email" class="m-0">Email</label>
+								      <input 
+								      	type="text" 
+								      	formControlName="email" 
+								      	class="form-control" 
+								      	id="email" 
+								      	placeholder="email"
+								      	[ngClass]="{'invalid':(email.dirty || email.touched) && email.invalid && email.errors.required}"
+								      >
+								      <div class="invalid-feedback d-block" *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.required">
+								        email invalido!
+								      </div>
+
+								      <div class="invalid-feedback d-block" *ngIf="validation_error">
+								        Este email ya esta en uso
+								      </div>
+								     </div>
+							    </div>
+
+							    <div class="col-12">
+							    	<div class="form-group">
+								      <label for="password" class="m-0">contraseña</label>
+								      <input 
+								      	type="password" 
+								      	formControlName="password" 
+								      	class="form-control" 
+								      	id="password" 
+								      	placeholder="password"
+								      	[ngClass]="{'invalid':(password.dirty || password.touched) && password.invalid && password.errors.required}"
+								      >
+								      <div class="invalid-feedback d-block" *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
+								        Contraseña required!
+								      </div>
+								    </div>
+							    </div>
+							    <div class="col-12">
+							    	<button type="submit" class="btn btn-custom-primary w-100" [disabled]="!registerForm.valid">Registrar</button>
+							    </div>
+							    <hr>
+							    
+							  </div>
+
+							</form>
+							
+						</div>
+				</div>
+				<div class="row"></div>
+			</div>
+		</div>
+	</div>
+</div>

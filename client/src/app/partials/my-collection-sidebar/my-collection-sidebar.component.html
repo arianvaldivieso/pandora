@@ -1,0 +1,21 @@
+<div id="my-collection-sidebar">
+	
+	<ul class="my-collections">
+		<li class="my-collections-title item"><a href="">My Collections</a></li>
+		<li *ngFor="let collection of collections" class="item">
+			<a [routerLink]="['/collections',getSlug(collection.id+'-'+collection.title)]" (click)="selectCollection(collection)">{{collection.title}}</a>
+		</li>
+		<ng-template *ngIf="!collections.length && user">
+			<li>No collections</li>
+		</ng-template>
+
+		<ng-template *ngIf="!collections.length && !user">
+			<li>Login to see your collections</li>
+		</ng-template>
+	</ul>
+
+	<div class="create-new-collection-button" (click)="openDialogCollection()">
+		<i class="flaticon-anadir"></i> create collection
+	</div>
+
+</div>

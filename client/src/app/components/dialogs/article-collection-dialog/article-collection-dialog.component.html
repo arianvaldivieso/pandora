@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Add items to a collection</h2>
+<mat-dialog-content>
+
+<form [formGroup]="collectionForm" (ngSubmit)="onSubmit()" novalidate class="custom-form">
+
+	<div class="row">
+
+		<div class="col-xl-12 col-12">
+
+			<ng-select formControlName="collection_id" [placeholder]="'Collection'" class="filter custom-select-wizer">
+			  <ng-option *ngFor="let collection of collections" [value]="collection.id">
+			  	{{collection.title}}
+			  </ng-option>
+			</ng-select>
+
+			<div class="invalid-feedback d-block" *ngIf="(collection_id.dirty || collection_id.touched) && collection_id.invalid && collection_id.errors.required">
+        Collection title required
+      </div>
+    	
+    </div>
+
+    <div class="col-12">
+    	<button type="submit" class="btn btn-custom-primary w-100" [disabled]="!collectionForm.valid">Save</button>
+    </div>
+  </div>
+
+</form>
+</mat-dialog-content>

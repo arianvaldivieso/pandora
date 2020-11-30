@@ -1,0 +1,23 @@
+.ng-select.custom-select-wizer {
+    border:0px;
+    min-height: 0px;
+    border-radius: 0;
+    border:none;
+    border-bottom: solid 1px #d8d8d8;
+    margin-bottom: 10px;
+}
+.ng-select.custom-select-wizer .ng-select-container  {            
+    min-height: 0px;
+    border-radius: 0;
+}
+
+.ng-select.custom-select-wizer ::ng-deep .ng-select-container  {            
+    //border-radius: 3px;
+    border:none;
+    font-weight: 600;
+    font-size: .8rem;
+
+    .ng-placeholder{
+    	// font-weight: 500;
+    }
+}

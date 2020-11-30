@@ -1,0 +1,63 @@
+<div class="article" [ngClass]="{'min-w':dialog}">
+	<div class="content-article">
+		<div class="header-article">
+			<div class="industry-article">{{article.date}}</div>
+
+		</div>
+
+		<div class="info-article">
+			<div class="image-article" *ngIf="article.image" [ngStyle]="{'background-image': 'url(' + article.image + ')'}"></div>
+			<div class="text-article">
+				<div class="page-article">Unidad: {{article.unit}}</div>
+				<div class="title-article" (click)="openArticle()" data-toggle="tooltip" data-placement="top" title="{{article.reference}}">
+					{{article.reference}}
+				</div>
+				<div class="description-article">
+					{{article.description}}
+				</div>
+				<div class="lenght-article" *ngIf="article.ubication"><span class="">Ubicación: {{article.ubication}}</span></div>
+				<div class="lenght-article"><span class="">Precio: {{article.unit_price}}$</span></div>
+				<div class="lenght-article" *ngIf="article.availability"><span class="">Cantidad: {{article.availability}}</span></div>
+				
+				<div class="lenght-article" *ngIf="article.garanty"><span class="">Garantia: {{article.garanty}}$</span></div>
+			</div>
+		</div>
+
+		<div class="article-tags">
+			<app-tag [name]="'datasheet'" [link]="article.datasheet"></app-tag>
+			<app-tag [name]="'manual'" [link]="article.manual"></app-tag>
+			<app-tag [name]="'video'" *ngIf="article.video" [link]="article.video"></app-tag>
+			<!--<app-tag [name]="tag.name" *ngFor="let tag of article.tags | slice:0:2"></app-tag>-->
+			<span class="view-more" (click)="viewMore()">{{article.client}}</span>
+		</div>
+	</div>
+
+	<!--<div class="actions-article d-none">
+		<div class="drag-and-drop-article"></div>
+
+		<div class="article-normal-actions">
+			<div class="article-action" (click)="openDialog()">
+				<i class="flaticon-telegram"></i>
+			</div>	
+
+			<div class="article-action likes" (click)="toggleLike()" [ngClass]="{'like':article.likes.length}">
+				<i class="flaticon-heart"></i>
+				<div class="article-like-count" *ngIf="article.__meta__.likes_count">
+					{{article.__meta__.likes_count}}
+				</div>
+			</div>	
+
+			<div class="article-action" style="cursor: pointer;" *ngIf="collections" (click)="pocket()">
+				<i class="flaticon-pocket"></i>
+			</div>
+
+			<div class="article-action" [ngClass]="{
+				'view': (article.views.length || views.indexOf(article.id) !== -1)
+			}">
+				<i class="flaticon-check"></i>
+			</div>	
+			
+		</div>
+	</div>-->
+	
+</div>

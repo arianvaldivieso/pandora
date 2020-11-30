@@ -1,0 +1,26 @@
+<a [routerLink]="['/','collaborator',collaborator.slug]" class="collaborator">
+	<div class="content-collaborator">
+		
+
+		<div class="info-collaborator">
+			<div class="image-collaborator" [ngStyle]="{'background-image':'url('+collaborator.image+')'}"></div>
+			<div class="text-collaborator">
+				<div class="title-collaborator">
+					{{collaborator.name}}
+				</div>
+				<div class="business-collaborator">
+					{{collaborator.category.name}}
+				</div>
+				<div class="profession-collaborator">
+					{{collaborator.position}}
+				</div>
+			</div>
+		</div>
+
+		<div class="collaborator-tags">
+			<app-tag [name]="industry.name" *ngFor="let industry of collaborator.industries | slice:0:2"></app-tag>
+		</div>
+	</div>
+
+	
+</a>

@@ -1,0 +1,45 @@
+#presentation{
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	background: url('./../../../../assets/images/auth/auth.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	padding: 0 40px;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	position: relative;
+
+	.presentation-text,.presentation-sub-text{
+		color: white;
+		text-align: left;
+	}
+
+
+	.presentation-text{
+		
+		font-weight: 500;
+		font-size: 1.3rem;
+	}
+
+
+	.presentation-sub-text{
+		margin-top: 10px;
+		font-weight: 400;
+		font-size: .8rem;
+		max-width: 200px;
+	}
+
+	.presentation-logo{
+		//background: url('./../../../../assets/images/logo.png');
+		background-size: 160px 45px;
+		background-position: center;
+		background-repeat: no-repeat;
+		position: absolute;
+		height: 80px;
+		width: calc(100% - 80px);
+		bottom: 20px;
+	}
+}

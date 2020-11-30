@@ -1,0 +1,178 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import '~ngx-sharebuttons/themes/default/default-theme';
+
+*{
+	font-family: 'Montserrat', sans-serif;
+
+}
+
+body,html{
+	padding: 0;
+	margin: 0;
+	overflow-x: hidden;
+}
+
+.form-control:focus{
+	border-color:initial !important;
+	box-shadow: initial !important;
+}
+
+.container.container-max{
+	min-width: 1360px !important;
+	max-width: 1500px !important;
+}
+
+.title-section{
+	font-weight: 600;
+	font-size: 1.1rem;
+	color: #717d8b;
+	margin-top: 10px;
+}
+
+.custom-form{
+	label{
+		font-weight: 500;
+		font-size: 0.9rem;
+		color:#3a3a3a;
+	}
+
+
+
+	input[type="text"],input[type="email"],input[type="password"]{
+		border-radius: 3px;
+		border-width: 1px;
+		height: 45px;
+	}
+
+	.form-control:focus{
+		border-color:#3a3a3a !important;
+		box-shadow: initial !important;
+	}
+
+	.invalid{
+		border-color: #dc3545;
+	}
+
+	.form-title{
+		font-weight: 500;
+		font-size: 1.8rem;
+		color: #3a3a3a;
+		margin-bottom: 10px;
+
+	}
+}
+
+.btn-custom-primary:disabled,
+.btn-custom-primary[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.btn-custom-primary{
+	background-color: #048fce;
+	color: white;
+	font-weight: 500;
+	height: 45px;
+}
+
+.btn-custom-social-login{
+	text-transform: uppercase;
+	color: #7e819f;
+	border:2px solid #e4eaf6;
+	height: 40px;
+	margin-top: 10px;
+	padding: 5px 10px;
+	font-size: 0.9rem;
+}
+
+.btn-custom-social-login.google{
+	background-repeat: no-repeat;
+	background-size: 25px 25px;
+	background-position: 10px;
+	background-image: url('./assets/images/google.svg');
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.register-click.login-click{
+	text-decoration: none;
+	font-weight: 400;
+	padding: 20px 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #3a3a3a;
+	font-size: 0.9rem;
+	cursor: pointer;
+	&:hover{
+		color: #048fce;
+	}
+}
+
+
+/**
+ * Scrollbar
+ */
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.chevron-back {
+	height: 20px;
+	margin: 32px 0;
+	cursor: pointer;
+}
+
+.btn:focus{
+	box-shadow: none !important;
+}
+
+#discover{
+	margin-top: 20px;
+	padding: 20px 0;
+
+	.table-admin{
+		margin-top: 10px;
+		width: 100%;
+	}
+	
+}

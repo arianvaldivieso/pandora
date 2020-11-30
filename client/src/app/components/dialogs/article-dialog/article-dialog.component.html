@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>{{article.title}}</h2>
+<mat-dialog-content class="mat-typography">
+
+	<share-buttons
+
+ 		[title]="'wizerplatform.com - '+article.title"
+ 		[url]="article.url"
+ 		[description]="'website shared by: wizerplatform.com '+article.description"
+ 		[image]="article.image"
+ 		[tags]="tags"
+
+ 	></share-buttons>
+ 	<hr>
+
+ 	<div class="industry-article" *ngIf="article.industry">{{article.industry.name}}</div>
+	<div class="industry-article" *ngIf="!article.industry">N/A</div>
+
+
+  <p>{{article.description}}</p>
+
+  <div class="article-tags">
+ 		<app-tag [name]="tag.name" [minimal]="false" *ngFor="let tag of article.tags"></app-tag>
+ 	</div>
+  <hr>
+  <img [src]="article.image" alt="wizer-{{article.title}}" class="img-fluid" style="width: 60%; margin: 20%">
+
+  <hr>
+
+  <app-top-collaborator *ngIf="article.collaborators" [collaborators]="article.collaborators"></app-top-collaborator>
+
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
+

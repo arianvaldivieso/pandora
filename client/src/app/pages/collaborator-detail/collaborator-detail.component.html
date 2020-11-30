@@ -1,0 +1,46 @@
+<div id="collaborator-details">
+	<div class="container">
+		<div class="collaborator" *ngIf="collaborator">
+			<div class="row align-items-center">
+				<div class="col-6 col-md-auto">
+					<div class="collaborator-image" [ngStyle]="{'background-image':'url('+collaborator.image+')'}"></div>
+				</div>
+				<div class="col-6 col-md-5" style="position: relative;">
+					<h5 class="collaborator-name">{{collaborator.name}} <small><img src="assets/images/marker.svg" class="marker" alt=""> {{collaborator.address}}</small></h5>
+
+					<h6 class="collaborator-info">{{collaborator.category.name}} <br> <small>{{collaborator.position}}</small></h6>
+
+					<h5 class="bottom-info">
+						{{collaborator.__meta__.likes_count}} readers 
+						<button class="btn btn-wz" (click)="follow()">
+							<span *ngIf="!collaborator.likes.length">Follow</span>
+							<span *ngIf="collaborator.likes.length">Unfollow</span>
+						</button>
+					</h5>
+				</div>
+				<div class="col-12 col-md-4 align-self-start">
+					<h6 class="title-section">My topics:</h6>
+					<div class="collaborator-industries">
+						<app-tag [name]="industry.name" [minimal]="false" *ngFor="let industry of collaborator.industries"></app-tag>
+					</div>
+					
+				</div>
+			</div>
+
+			<br>
+
+			<div class="row">
+				<div class="col">
+					<div class="title-section">
+						Top Picks
+					</div>
+				</div>
+				
+			</div>
+
+			<app-group (scroll)="onScroll()" [articles]="articles" *ngIf="articles"></app-group>	
+			
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,82 @@
+<div id="login">
+
+	<app-brand class="w-100 d-lg-none d-md-block" [minimal]="true"></app-brand>
+	
+	<div class="container-xl container-lg mt-lg-0 mt-4" style="max-width: 100%;">
+		<div class="row justify-content-center">
+
+			<div class="col-xl-4 d-lg-block p-xl-0 d-none">
+				<app-presentation></app-presentation>
+			</div>
+
+			<div class="col-xl-8 col-md-6 p-xl-0 d-flex flex-column justify-content-between">
+
+				<div class="row">
+					<div class="col-12">
+						<app-brand class="w-100 d-lg-block d-none" [minimal]="true"></app-brand>
+					</div>
+				</div>
+				
+				<div class="row d-flex justify-content-center align-items-center">
+					
+						<div class="col-xl-5">
+							<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate class="custom-form">
+								<div class="row">
+									<div class="col-auto">
+										<div class="form-title">HEY! <img src="/assets/images/hey.svg" alt="hey - wizer"></div>
+									</div>
+								</div>
+								
+								<div class="row">
+									
+								</div>	
+								<div class="row">
+							    <div class="col-12">
+							    	<div class="form-group">
+								      <label for="email" class="m-0">Email</label>
+								      <input 
+								      	type="text" 
+								      	formControlName="email" 
+								      	class="form-control" 
+								      	id="email" 
+								      	placeholder="email"
+								      	[ngClass]="{'invalid':(email.dirty || email.touched) && email.invalid && email.errors.required}"
+								      >
+								      <div class="invalid-feedback d-block" *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.required">
+								        Email invalido!
+								      </div>
+								     </div>
+							    </div>
+
+							    <div class="col-12">
+							    	<div class="form-group">
+								      <label for="password" class="m-0">contraseña</label>
+								      <input 
+								      	type="password" 
+								      	formControlName="password" 
+								      	class="form-control" 
+								      	id="password" 
+								      	placeholder="password"
+								      	[ngClass]="{'invalid':(password.dirty || password.touched) && password.invalid && password.errors.required}"
+								      >
+								      <div class="invalid-feedback d-block" *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
+								        contraseña requerida!
+								      </div>
+								    </div>
+							    </div>
+							    <div class="col-12">
+							    	<button type="submit" class="btn btn-custom-primary w-100" [disabled]="!loginForm.valid">Inicia sesión</button>
+							    </div>
+							  </div>
+
+							</form>
+							
+						</div>
+				</div>
+
+				<div class="row"></div>
+
+			</div>
+		</div>
+	</div>
+</div>

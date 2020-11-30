@@ -1,0 +1,3 @@
+<div *ngIf="!link" class="tag" data-toggle="tooltip" data-placement="top" title="{{name}}">{{name | slice:0:(minimal) ? 10 : 1000}} <span *ngIf="name.length > 10 && minimal">...</span></div>
+
+<a href="{{link}}" target="_blank" *ngIf="link" class="tag" data-toggle="tooltip" data-placement="top" title="{{name}}">{{name | slice:0:(minimal) ? 10 : 1000}} <span *ngIf="name.length > 10 && minimal">...</span></a>

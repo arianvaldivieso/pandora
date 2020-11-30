@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>{{article.title}}</h1>
+<div mat-dialog-content>
+  <p>choose an option to share this article through wizer</p>
+ 	<share-buttons
+
+ 		[title]="'wizerplatform.com - '+article.title"
+ 		[url]="article.url"
+ 		[description]="'website shared by: wizerplatform.com '+article.description"
+ 		[image]="article.image"
+ 		[tags]="tags"
+
+ 	></share-buttons>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>
+
+

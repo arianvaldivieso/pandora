@@ -1,0 +1,23 @@
+<div id="discover">
+
+	<div class="container">
+		<div class="row" *ngIf="!slug">
+			<div class="col-12">
+				<app-search-bar (collaboratorsOutput)="setCollaborators($event)" (filters)="searchArticles($event)"></app-search-bar>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<div class="title-section" *ngIf="!slug">
+					Historico
+				</div>
+			</div>
+			
+		</div>
+
+		<app-group (scroll)="onScroll()" [articles]="articles" [collections]="collections" *ngIf="articles"></app-group>	
+		
+	</div>
+
+</div>

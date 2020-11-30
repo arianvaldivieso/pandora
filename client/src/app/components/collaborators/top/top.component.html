@@ -1,0 +1,26 @@
+<div id="collaborators" *ngIf="collaborators">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="title-section">
+					Top Collaborators
+				</div>
+			</div>
+			
+		</div>
+
+		<owl-carousel-o [options]="customOptions">
+
+			<ng-template carouselSlide *ngFor="let collaborator of collaborators">
+				<div style="margin-right: 8px;">
+					<app-collaborator (selectCollaborator)="selectCollaborator($event)" [collaborator]="collaborator"></app-collaborator>
+				</div>
+			</ng-template>
+
+		</owl-carousel-o>
+		<!-- <div class="row">
+		</div> -->
+
+	</div>
+	
+</div>

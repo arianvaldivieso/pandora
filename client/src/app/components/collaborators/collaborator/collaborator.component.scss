@@ -1,0 +1,142 @@
+.collaborator{
+	box-shadow: 
+		3px 0px 5px 0px rgba(240,240,240,1),
+		0px 3px 6px 0px rgba(240,240,240,1);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  max-height: 170px;
+  height: 150px;
+  padding: 10px 7px;
+  border-radius: 5px;
+  display: flex;
+  text-decoration: none;
+
+  .content-collaborator{
+  	width: 100%;
+  	height: 100%; 
+  }
+
+  .header-collaborator{
+  	display: flex;
+  	justify-content: space-between;
+  	align-items: center;
+  	.industry-collaborator{
+  		background-color: #1d354f;
+  		color: white;
+  		font-weight: 600;
+  		font-size: 0.5rem;
+  		padding: 2px 10px;
+  		border-radius: 5px;
+  		text-transform: uppercase;
+  	}
+
+  	.collaborators-collaborator{
+  		display: flex;
+  		align-items: center;
+  		position: relative;
+  		right: 0;
+  		width: 0;
+  		height: 15px;
+  		.collaborator-collaborator{
+  			position: absolute;
+  			border-radius: 100%;
+  			width: 15px;
+  			height: 15px;
+  			background-position: center;
+  			background-size: contain;
+  			background-repeat: no-repeat;
+  			background-image: url('https://picsum.photos/200');
+
+  			@for $i from 1 through 4 {
+				  &:nth-child(#{$i}){
+	  				left: calc(12.6px * #{$i});
+	  			}
+				}
+
+
+  		}
+
+  	}
+
+  	.collaborators-others{
+  		font-weight: 500;
+  		font-size: 0.7rem;
+  		margin-right: 10px;
+  		color: #cacacb;
+  	}
+  }
+
+  .info-collaborator{
+  	width: 100%;
+  	height: 80px;
+  	display: flex;
+  	margin-top: 10px;
+  	.image-collaborator{
+  		// background-image: url('https://i2.wp.com/a16z.com/wp-content/uploads/2019/10/Untitled-design-6.png?fit=1200%2C630&ssl=1');
+  		background-size: cover;
+  		background-position: 0 0;
+  		background-repeat: no-repeat;
+  		width: 80px;
+  		height: 80px;
+  		border-radius: 5px;
+  	}
+
+  	.text-collaborator{
+  		width: calc(100% - 80px);
+  		padding: 0px 7px 0 10px;
+  		position: relative;
+
+
+	  	.title-collaborator{
+        cursor: pointer;
+	  		font-weight: 600;
+	  		font-size: .9rem;
+	  		color: #3a3a3a;
+	  		line-height: 15px;
+
+	  	}
+
+      .business-collaborator,.profession-collaborator{
+        font-size: 0.7rem;
+        color: #cacacb;
+        margin: 5px 0;
+      }
+
+      .business-collaborator{
+        font-weight: 400;
+      }
+
+      .profession-collaborator{
+        font-weight: 600;
+        color: #000;
+      }
+
+  	}
+  }
+
+  .collaborator-tags{
+  	margin-top: 10px;
+  	display: flex;
+  	.tag{
+  		margin: 0 3px;
+  		border-radius: 35px;
+  		color: #048fce;
+  		border:solid 1px #048fce;
+  		display: flex;
+  		justify-content: center;
+  		align-items: center;
+  		font-size: 0.67rem;
+  		padding: 5px 7px;
+  		font-weight: 600;
+  		cursor: pointer;
+  		transition: all .1s;
+  		&:hover{
+  			background-color: #048fce;
+  			color: white;
+  		}
+  	}
+  }
+
+
+}

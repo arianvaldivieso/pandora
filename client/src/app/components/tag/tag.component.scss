@@ -1,0 +1,18 @@
+.tag{
+	margin: 0 3px;
+	border-radius: 35px;
+	color: #048fce;
+	border:solid 1px #048fce;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 0.67rem;
+	padding: 5px 7px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all .1s;
+	&:hover{
+		background-color: #048fce;
+		color: white;
+	}
+}

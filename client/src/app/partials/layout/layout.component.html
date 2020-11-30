@@ -1,0 +1,83 @@
+<div id="wizer">
+	<div class="container-xl container-lg p-xl-0" style="max-width: 100%;">
+		<div class="row">
+			<div class="col-xl-3 d-none">
+		  	<app-sidebar></app-sidebar>
+			</div>
+
+			<div class="col-xl-12">
+				<div class="content">
+			    <div id="header">
+			    	<div style="min-height: 90px;" class="row align-items-center justify-content-lg-end justify-content-between">
+			    		<div class="col-6 col-md-3">
+			    			<a [routerLink]="['/']">
+			    				<img src="/assets/images/logo.png" alt="pandora" class="img-fluid">
+			    			</a>
+			    		</div>
+			    		<div class="col-xl-6 col-md-6 col-6">
+			    			<div class="principal">
+					        <a [routerLink]="['/pandora']" [routerLinkActive]="['active']" class="discover">Pandora</a>
+					        <a [routerLink]="['/reload']" [routerLinkActive]="['active']" class="discover">Recarga</a> 
+					        <a [routerLink]="['/history']" [routerLinkActive]="['active']" class="discover">Historico</a> 
+					        <a [routerLink]="['/stats']" [routerLinkActive]="['active']" class="my-library">Estadisticas</a> 
+					      </div>
+
+			    		</div>
+			    		<div class="col col-md-3 col-12">
+			    			<div class="user">
+					        <div 
+					          class="user-avatar" 
+					          *ngIf="user.id"
+					          [ngStyle]="{'background-image': 'url(' + this.user.avatar + ')'}"
+					          [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+					        ></div>
+
+					        <mat-menu #menu="matMenu">
+
+					        	<a [routerLink]="['/clients']" mat-menu-item *ngIf="user.role == 'admin'">
+					            <div class="d-flex justify-content-between align-items-center">
+					              <span>Indicadores (Kpi's)</span>
+					            </div>
+					            
+					          </a>
+
+					        	<a [routerLink]="['/users']" mat-menu-item *ngIf="user.role == 'admin'">
+					            <div class="d-flex justify-content-between align-items-center">
+					              <span>Administrar usuarios</span>
+					            </div>
+					            
+					          </a>
+					          <button mat-menu-item (click)="logout()">
+					            <div class="d-flex justify-content-between align-items-center">
+					              <i class="flaticon-logout"></i>
+					              <span>Cerrar sesión</span>
+					            </div>
+					            
+					          </button>
+					        </mat-menu>
+
+
+					        <div class="user-login" *ngIf="!user.id">
+					          <a [routerLink]="['/login']">Inicia sesión</a>
+					          <!--<a [routerLink]="['/register']">register</a>-->
+					        </div>
+					      </div>
+			    		</div>
+			    	</div>
+			      
+
+			      
+			    </div>
+
+			    
+			    <router-outlet></router-outlet>
+			    
+			  </div>
+			</div>
+	  
+		</div>
+		
+	 
+
+	</div>
+</div>
