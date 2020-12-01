@@ -4,15 +4,19 @@ FROM php:7.4-fpm
 ARG user
 ARG uid
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    default-mysql-client \
     libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    libmagickwand-dev \
+    libzip-dev \
     libonig-dev \
-    libxml2-dev \
+    locales \
     zip \
-    unzip
+    jpegoptim optipng pngquant gifsicle \
+    && pecl install imagick
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
