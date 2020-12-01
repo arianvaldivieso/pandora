@@ -23,7 +23,7 @@ services:
   nginx:
     image: nginx:alpine
     ports:
-      - "83:80"
+      - "9002:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:cached
       - ./:/application:cached
