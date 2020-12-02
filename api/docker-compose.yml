@@ -1,41 +1,32 @@
-version: '3.5'
+version: '2'
 
 services:
-  app:
-    build:
-      context: '.'
-      args:
-        uid: ${UID}
-    container_name: app
+  mariadb:
+    image: 'docker.io/bitnami/mariadb:10.2-debian-10'
     environment:
-      - APACHE_RUN_USER=#${UID}
-      - APACHE_RUN_GROUP=#${UID}
-    volumes:
-      - .:/var/www/html
-    ports:
-      - 9002:80
-    networks:
-      backend:
-        aliases:
-          - app
-
-  mysql:
-    image: mysql:5.7
-    container_name: mysql
-    volumes:
-      - ./run/var:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=33klwZ_76
-      - MYSQL_DATABASE=pandora
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=33klwZ_76
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=admin
+      - MARIADB_DATABASE=pandora
+      - MARIADB_PASSWORD=password
     ports:
       - 3307:3306
-    networks:
-      backend:
-        aliases:
-          - db
-
-networks:
-  backend:
-    name: backend-network
+    volumes:
+      - mydb-db:/var/lib/mysql
+  myapp:
+    tty: true
+    image: docker.io/bitnami/laravel:7-debian-10
+    environment:
+      - DB_HOST=mariadb
+      - DB_USERNAME=admin
+      - DB_DATABASE=pandora
+      - DB_PASSWORD=password
+    depends_on:
+      - mariadb
+    ports:
+      - 9002:3000
+    volumes:
+      - ./:/app
+    # privileged: true # Privileged mode could be required to run this container under Windows
+    # 
+volumes:
+  mydb-db:
