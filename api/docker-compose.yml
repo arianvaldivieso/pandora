@@ -1,51 +1,41 @@
-version: "3.7"
+version: '3.5'
+
 services:
   app:
     build:
+      context: '.'
       args:
-        user: admin
-        uid: 1000
-      context: ./
-      dockerfile: Dockerfile
-    image: pandora
-    container_name: pandora
-    restart: unless-stopped
-    working_dir: /var/www/
-    volumes:
-      - ./:/var/www
-    networks:
-      - pandora-network
-
-  db:
-    image: mysql:5.7
-    container_name: pandora-db
-    restart: unless-stopped
+        uid: ${UID}
+    container_name: app
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
-    ports:
-      - 3307:3306
+      - APACHE_RUN_USER=#${UID}
+      - APACHE_RUN_GROUP=#${UID}
     volumes:
-      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
-    networks:
-      - pandora-network
-
-  nginx:
-    image: nginx:alpine
-    container_name: pandora-nginx
-    restart: unless-stopped
+      - .:/var/www/html
     ports:
       - 9002:80
-    volumes:
-      - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
     networks:
-      - pandora-network
+      backend:
+        aliases:
+          - app
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - ./run/var:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=33klwZ_76
+      - MYSQL_DATABASE=pandora
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=33klwZ_76
+    ports:
+      - 3307:3306
+    networks:
+      backend:
+        aliases:
+          - db
 
 networks:
-  pandora-network:
-    driver: bridge
+  backend:
+    name: backend-network
