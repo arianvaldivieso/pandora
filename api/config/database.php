@@ -64,7 +64,7 @@ return [
         ],
 
         'pandora' => [
-            'driver' => 'mysql',
+            'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST_GP', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
