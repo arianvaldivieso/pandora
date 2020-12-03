@@ -1,52 +1,57 @@
-FROM php:7.3-apache
+FROM docker.io/bitnami/minideb:buster
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
+
+COPY prebuildfs /
+# Install required system packages and dependencies
+RUN install_packages ca-certificates curl ghostscript gzip imagemagick libargon2-1 libbsd0 libbz2-1.0 libc6 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 netcat procps sudo tar zlib1g
+RUN /build/bitnami-user.sh
+RUN /build/install-nami.sh
+RUN bitnami-pkg unpack php-7.3.25-1 --checksum f197077c17bfd3aa8ffb20205cfb01118e97266f8d41a58db7ca0f4bf31966d8
+RUN bitnami-pkg install node-14.15.1-1 --checksum 1ed8b14879cb2cd99ee53a9bfe53dc1dbfe3c9fccab2c3aa7a37ddbef248ff74
+RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
+RUN bitnami-pkg install laravel-7.30.1-1 --checksum 251a5b59e2383499f2459b441b43cd9b1978d985d87333139e8b0d49cc74cfdb
+RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 
 RUN apt-get update
+RUN apt-get install -y apt-transport-https
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+RUN apt-get update
+RUN ACCEPT_EULA=Y apt-get install -y msodbcsql mssql-tools
+RUN apt-get install -y unixodbc-utf16
+RUN apt-get install -y unixodbc-dev-utf16
 
-# 1. development packages
-RUN apt-get install -y \
-    git \
-    zip \
-    curl \
-    sudo \
-    unzip \
-    libicu-dev \
-    libbz2-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libmcrypt-dev \
-    libreadline-dev \
-    libfreetype6-dev \
-    g++
+# install driver sqlsrv
+RUN pecl install sqlsrv
+RUN echo "extension=sqlsrv.so" >> /etc/php/7.0/apache2/php.ini
+RUN pecl install pdo_sqlsrv
+RUN echo "extension=pdo_sqlsrv.so" >> /etc/php/7.0/apache2/php.ini
 
-# 2. apache configs + document root
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# load driver sqlsrv
+RUN echo "extension=/usr/lib/php/20151012/sqlsrv.so" >> /etc/php/7.0/apache2/php.ini
+RUN echo "extension=/usr/lib/php/20151012/pdo_sqlsrv.so" >> /etc/php/7.0/apache2/php.ini
+RUN echo "extension=/usr/lib/php/20151012/sqlsrv.so" >> /etc/php/7.0/cli/php.ini
+RUN echo "extension=/usr/lib/php/20151012/pdo_sqlsrv.so" >> /etc/php/7.0/cli/php.ini
 
-# 3. mod_rewrite for URL rewrite and mod_headers for .htaccess extra headers like Access-Control-Allow-Origin-
-RUN a2enmod rewrite headers
 
-# 4. start with base php config, then add extensions
-RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN mkdir /app && chown bitnami:bitnami /app
 
-RUN docker-php-ext-install \
-    bz2 \
-    intl \
-    iconv \
-    bcmath \
-    opcache \
-    calendar \
-    mbstring \
-    pdo_mysql \
-    zip
+COPY rootfs /
+ENV BITNAMI_APP_NAME="laravel" \
+    BITNAMI_IMAGE_VERSION="7.30.1-debian-10-r30" \
+    NODE_PATH="/opt/bitnami/node/lib/node_modules" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
 
-# 5. composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+EXPOSE 3000
 
-# 6. we need a user with the same UID/GID with host user
-# so when we execute CLI commands, all the host file's ownership remains intact
-# otherwise command from inside container will create root-owned files and directories
-ARG uid
-RUN useradd -G www-data,root -u $uid -d /home/devuser devuser
-RUN mkdir -p /home/devuser/.composer && \
-    chown -R devuser:devuser /home/devuser
+WORKDIR /app
+USER bitnami
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "php", "artisan", "serve", "--host=0.0.0.0", "--port=3000" ]
+
