@@ -23,6 +23,10 @@ services:
       - APP_DEBUG=true
       - APP_ENV=local
       - APP_KEY=base64:gpy5yuVmMykxrpIqfovUFu84rcdFJMAYEyoFs/xxyuo=
+      - DB_HOST_GP=SRVWMSTEST
+      - DB_USERNAME_GP=PANDORA
+      - DB_DATABASE_GP=pandora_api
+      - DB_PASSWORD_GP=%colseiN20*
     depends_on:
       - database
     ports:
