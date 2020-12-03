@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:prod": "ng build --prod --deployUrl=http://colsein.com.co/pandora/client/dist",
+    "build:prod": "ng build --prod --deployUrl=http://colsein.com.co/pandora/client/dist/",
     "build:dev": "bash deploy.sh --env dev"
   },
   "private": true,
