@@ -12,7 +12,7 @@ class AvailabilityController extends Controller
 
     public function index()
     {
-        $availabilities = Availability::orderBy('id','desc')->get();
+        $availabilities = Availability::all();
 
 
         $availabilities = $availabilities->map(function($item){
@@ -40,8 +40,7 @@ class AvailabilityController extends Controller
 
     public function reload()
     {
-        $availabilities = Reload::orderBy('id','desc')->get();
-
+        $availabilities = Reload::all();
 
         $availabilities = $availabilities->map(function($item){
             return [
@@ -68,7 +67,7 @@ class AvailabilityController extends Controller
 
     public function history()
     {
-        $availabilities = History::orderBy('id','desc')->get();
+        $availabilities = History::all();
 
 
         $availabilities = $availabilities->map(function($item){
