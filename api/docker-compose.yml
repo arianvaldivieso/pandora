@@ -14,7 +14,9 @@ services:
       - mydb-db:/var/lib/mysql
   pandora:
     tty: true
-    image: docker.io/bitnami/laravel:7-debian-10
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
       - DB_HOST=database
       - DB_USERNAME=admin
