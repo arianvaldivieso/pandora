@@ -16,7 +16,7 @@ services:
     tty: true
     image: docker.io/bitnami/laravel:8-debian-10
     environment:
-      - DB_HOST=mariadb
+      - DB_HOST=localhost
       - DB_USERNAME=root
       - DB_DATABASE=pandora_api
       - DB_PASSWORD=33klwZ_76
