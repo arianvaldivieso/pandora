@@ -14,28 +14,6 @@ RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1
 RUN bitnami-pkg install laravel-7.30.1-1 --checksum 251a5b59e2383499f2459b441b43cd9b1978d985d87333139e8b0d49cc74cfdb
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 
-RUN apt-get update
-RUN apt-get install -y apt-transport-https
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
-RUN apt-get update
-RUN ACCEPT_EULA=Y apt-get install -y msodbcsql mssql-tools
-RUN apt-get install -y unixodbc-utf16
-RUN apt-get install -y unixodbc-dev-utf16
-
-# install driver sqlsrv
-RUN pecl install sqlsrv
-RUN echo "extension=sqlsrv.so" >> /etc/php/7.0/apache2/php.ini
-RUN pecl install pdo_sqlsrv
-RUN echo "extension=pdo_sqlsrv.so" >> /etc/php/7.0/apache2/php.ini
-
-# load driver sqlsrv
-RUN echo "extension=/usr/lib/php/20151012/sqlsrv.so" >> /etc/php/7.0/apache2/php.ini
-RUN echo "extension=/usr/lib/php/20151012/pdo_sqlsrv.so" >> /etc/php/7.0/apache2/php.ini
-RUN echo "extension=/usr/lib/php/20151012/sqlsrv.so" >> /etc/php/7.0/cli/php.ini
-RUN echo "extension=/usr/lib/php/20151012/pdo_sqlsrv.so" >> /etc/php/7.0/cli/php.ini
-
-
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN mkdir /app && chown bitnami:bitnami /app
