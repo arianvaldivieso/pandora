@@ -3,6 +3,7 @@ sudo bash -c "curl -s https://packages.microsoft.com/config/ubuntu/18.04/prod.li
 sudo apt-get update
 sudo ACCEPT_EULA=Y apt-get -y install msodbcsql17 mssql-tools
 sudo apt-get -y install unixodbc-dev
+sudo apt-get -y install php-pear
 
 sudo apt-get -y install gcc g++ make autoconf libc-dev pkg-config
 sudo pecl7.X-sp install sqlsrv
