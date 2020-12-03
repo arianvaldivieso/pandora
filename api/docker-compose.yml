@@ -12,7 +12,7 @@ services:
       - 3307:3306
     volumes:
       - mydb-db:/var/lib/mysql
-  myapp:
+  pandora:
     tty: true
     image: docker.io/bitnami/laravel:8-debian-10
     environment:
