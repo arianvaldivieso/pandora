@@ -17,19 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN mkdir /app && chown bitnami:bitnami /app
 
-
-RUN curl -s https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-RUN sudo bash -c "curl -s https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list"
-RUN sudo apt-get update
-RUN sudo ACCEPT_EULA=Y apt-get -y install msodbcsql17 mssql-tools
-RUN sudo apt-get -y install unixodbc-dev
-
-RUN sudo apt-get -y install gcc g++ make autoconf libc-dev pkg-config
-RUN sudo pecl7.X-sp install sqlsrv
-RUN sudo pecl7.X-sp install pdo_sqlsrv
-
-RUN sudo bash -c "echo extension=sqlsrv.so > /etc/php7.X-sp/conf.d/sqlsrv.ini"
-RUN sudo bash -c "echo extension=pdo_sqlsrv.so > /etc/php7.X-sp/conf.d/pdo_sqlsrv.ini"
+RUN /build/sqlserver.sh
 # RUN sudo service php7.X-fpm-sp restart
 
 COPY rootfs /
