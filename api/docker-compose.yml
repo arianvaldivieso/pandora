@@ -22,6 +22,7 @@ services:
       - DB_PASSWORD=pandora_33klwZ_76
       - APP_DEBUG=true
       - APP_ENV=local
+      - APP_KEY=base64:gpy5yuVmMykxrpIqfovUFu84rcdFJMAYEyoFs/xxyuo=
     depends_on:
       - database
     ports:
