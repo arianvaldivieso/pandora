@@ -11,7 +11,7 @@ services:
     ports:
       - 3307:3306
     volumes:
-      - ./database:/var/lib/mysql
+      - ./database-docker:/var/lib/mysql
   myapp:
     tty: true
     image: docker.io/bitnami/laravel:7-debian-10
