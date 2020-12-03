@@ -14,7 +14,7 @@ services:
       - mydb-db:/var/lib/mysql
   myapp:
     tty: true
-    image: docker.io/bitnami/laravel:7-debian-10
+    image: docker.io/bitnami/laravel:8-debian-10
     environment:
       - DB_HOST=mariadb
       - DB_USERNAME=admin
