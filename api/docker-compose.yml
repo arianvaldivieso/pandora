@@ -11,7 +11,7 @@ services:
     ports:
       - 3307:3306
     volumes:
-      - mydb-db:/var/lib/mysql
+      - ./database:/var/lib/mysql
   myapp:
     tty: true
     image: docker.io/bitnami/laravel:8-debian-10
@@ -28,5 +28,3 @@ services:
       - ./:/app
     # privileged: true # Privileged mode could be required to run this container under Windows
     # 
-volumes:
-  mydb-db:
