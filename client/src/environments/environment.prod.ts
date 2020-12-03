@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.wizerplatform.com/api'
+  apiUrl: 'http://colsein.com.co:9002/api'
 };
