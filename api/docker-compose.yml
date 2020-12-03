@@ -5,7 +5,7 @@ services:
     image: 'docker.io/bitnami/mariadb:10.2-debian-10'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=root
+      - MARIADB_USER=admin
       - MARIADB_DATABASE=pandora_api
       - MARIADB_PASSWORD=33klwZ_76
     ports:
@@ -17,7 +17,7 @@ services:
     image: docker.io/bitnami/laravel:8-debian-10
     environment:
       - DB_HOST=mariadb
-      - DB_USERNAME=root
+      - DB_USERNAME=admin
       - DB_DATABASE=pandora_api
       - DB_PASSWORD=33klwZ_76
     depends_on:
