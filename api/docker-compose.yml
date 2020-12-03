@@ -2,10 +2,7 @@ version: '2'
 
 services:
   database:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: pandora
+    image: 'docker.io/bitnami/mariadb:10.2-debian-10'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=admin
@@ -17,7 +14,9 @@ services:
       - mydb-db:/var/lib/mysql
   pandora:
     tty: true
-    image: docker.io/bitnami/laravel:7-debian-10
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
       - DB_HOST=database
       - DB_USERNAME=admin
