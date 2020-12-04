@@ -14,10 +14,9 @@ services:
       - mydb-db:/var/lib/mysql
   pandora:
     tty: true
-    build:
-      context: ./docker-image/
-      dockerfile: Dockerfile
+    image: jjuanrivvera99/ubuntu-apache-php-sqlserver
     environment:
+      - DB_CONNECTION=mysql
       - DB_HOST=database
       - DB_USERNAME=admin
       - DB_DATABASE=pandora_api
@@ -32,9 +31,9 @@ services:
     depends_on:
       - database
     ports:
-      - 9002:3000
+      - 9002:80
     volumes:
-      - ./:/app
+      - ./:/var/www/
     # privileged: true # Privileged mode could be required to run this container under Windows
     # 
 volumes:

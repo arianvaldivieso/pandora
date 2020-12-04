@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\ClientController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('', function(){
+    return response()->json(User::all());
+});    
 
 
 Route::group([
