@@ -23,12 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('', function(){
 
     $serverName = "SRVWMSTEST.COLSEIN.COM.CO"; //serverName\instanceName
-    $connectionInfo = array( "Database"=>"Pandora", "UID"=>"PANDORA", "PWD"=>"%colseiN20*");
+    $connectionInfo = array( "Database"=>"Pandora", "UID"=>"sa", "PWD"=>"t3St#2021**");
     $conn = sqlsrv_connect( $serverName, $connectionInfo);
-
-    echo "<pre>";
-    print_r ($connectionInfo);
-    echo "</pre>";
 
     if( $conn ) {
          echo "Conexión establecida.<br />";
