@@ -30,7 +30,9 @@ Route::get('', function(){
          echo "Conexión establecida.<br />";
     }else{
          echo "Conexión no se pudo establecer.<br />";
-         die( print_r( sqlsrv_errors(), true));
+         echo "<pre>";
+         print_r (print_r( sqlsrv_errors(), true));
+         echo "</pre>";
     }
 
     //return response()->json(Availability::all());
