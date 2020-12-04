@@ -35,7 +35,7 @@ Route::get('', function(){
          echo "</pre>";
     }
 
-    //return response()->json(Availability::all());
+    return response()->json(Availability::all());
 });    
 
 
