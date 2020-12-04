@@ -68,6 +68,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST_GP', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
+            'dns' => env('DB_DNS_GP'),
             'database' => env('DB_DATABASE_GP', 'PANDORA'),
             'username' => env('DB_USERNAME_GP', 'forge'),
             'password' => env('DB_PASSWORD_GP', ''),
