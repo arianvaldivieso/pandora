@@ -21,7 +21,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('', function(){
-    return response()->json(Availability::all());
+
+    $serverName = "SRVWMSTEST.COLSEIN.COM.CO"; //serverName\instanceName
+    $connectionInfo = array( "Database"=>"Pandora", "UID"=>"PANDORA", "PWD"=>"%colseiN20*");
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+    if( $conn ) {
+         echo "Conexión establecida.<br />";
+    }else{
+         echo "Conexión no se pudo establecer.<br />";
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    //return response()->json(Availability::all());
 });    
 
 
