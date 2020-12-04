@@ -25,9 +25,9 @@ services:
       - APP_ENV=local
       - APP_KEY=base64:gpy5yuVmMykxrpIqfovUFu84rcdFJMAYEyoFs/xxyuo=
       - DB_HOST_GP=SRVWMSTEST.COLSEIN.COM.CO
-      - DB_USERNAME_GP=PANDORA
+      - DB_USERNAME_GP=sa
       - DB_DATABASE_GP=Pandora
-      - DB_PASSWORD_GP=%colseiN20*
+      - DB_PASSWORD_GP=t3St#2021**
     depends_on:
       - database
     ports:
