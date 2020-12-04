@@ -10,5 +10,5 @@ class Availability extends Model
     use HasFactory;
 
     protected $connection = 'pandora';
-    protected $table = 'disponibilidad';
+    protected $table = 'disponible';
 }

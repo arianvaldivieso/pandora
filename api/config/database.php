@@ -73,7 +73,7 @@ return [
             'password' => env('DB_PASSWORD_GP', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
-            'prefix' => 'dbo.',
+            'prefix' => '',
             'prefix_indexes' => true
         ],
 
