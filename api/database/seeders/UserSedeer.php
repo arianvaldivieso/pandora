@@ -18,7 +18,8 @@ class UserSedeer extends Seeder
     	User::create([
     		'name' => 'admin',
     		'email' => 'admin@pandora.com',
-    		'password' => Hash::make('123456789')
+    		'password' => Hash::make('123456789'),
+            'role' => 'admin'
     	]);
     }
 }
