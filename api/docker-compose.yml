@@ -28,7 +28,6 @@ services:
       - DB_USERNAME_GP=sa
       - DB_DATABASE_GP=Pandora
       - DB_PASSWORD_GP=t3St#2021**
-      - DATABASE_URL_GP=SRVWMSTEST.COLSEIN.COM.CO
     depends_on:
       - database
     ports:
