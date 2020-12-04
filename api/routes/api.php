@@ -26,6 +26,10 @@ Route::get('', function(){
     $connectionInfo = array( "Database"=>"Pandora", "UID"=>"PANDORA", "PWD"=>"%colseiN20*");
     $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
+    echo "<pre>";
+    print_r ($connectionInfo);
+    echo "</pre>";
+
     if( $conn ) {
          echo "Conexión establecida.<br />";
     }else{
