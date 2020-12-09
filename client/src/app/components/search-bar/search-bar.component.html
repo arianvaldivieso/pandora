@@ -10,66 +10,13 @@
             [apiString]="apiUrl"
             paramName="keyword"
             payloadPropName="data"
-            suggestionPropName="name"
+            suggestionPropName="reference"
             placeholder="Busca por referencia"
             (selected)="onSelected($event)"></ngx-autocomplete>
 
-            <div class="chips">
-							<div class="chip" (click)="deleteChips(chip,true)" *ngFor="let chip of chips">{{chip.name}}</div>            	
-            </div>
 				</div>
 			</div>	
 		</div>
 	</div>
-
-	<!--<div class="filters d-none">
-		<div class="container">
-			<div class="row d-flex justify-content-center">
-				<div class="col-xl-10">
-					<div class="row">
-						<div class="col-xl-7 mb-xl-0 mb-2">
-							<div class="first-filter" *ngIf="categories.length">
-
-								<button 
-									(click)="toggleCategory(category)" 
-									[ngClass]="{
-										'active': selectedCategories.indexOf(category.id) !== -1
-									}"
-									class="btn filter" 
-									*ngFor="let category of categories"
-								>
-									{{category.name}}
-								</button>
-
-								
-
-
-							</div>	
-						</div>
-							
-
-						<div class="col-xl-3 col-md-6 border-right-custom mb-xl-0 mb-2">
-							<div class="second-filter">
-								<ng-select [(ngModel)]="selectedType" (change)="onChangeFilter('type')" class="filter custom-select-wizer" [placeholder]="'type'">
-								   <ng-option *ngFor="let type of types" [value]="type.id">{{type.name}}</ng-option>
-								</ng-select>
-							</div>
-						</div>
-
-						<div class="col-xl-2 col-md-6 border-right-custom mb-xl-0 mb-2">
-							<div class="third-filter">
-								<ng-select [(ngModel)]="selectedCollaborator" (change)="onChangeFilter('collaborators')" class="filter custom-select-wizer" [placeholder]="'Collaborators'">
-								   <ng-option *ngFor="let collaborator of collaborators" [value]="collaborator.id">{{collaborator.name}}</ng-option>
-								</ng-select>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				
-			</div>
-			
-		</div>
-	</div>-->
 	
 </div>
