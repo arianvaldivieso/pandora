@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
 
   	let response:any = await this._client.getClients();
 
-  	this.clients = response.clients;
+  	this.clients = response.data.clients;
 	}
 
   createRegisterForm() {
