@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng serve --host=server.io",
-    "build": "ng build",
+    "dev:prod": "ng serve",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
