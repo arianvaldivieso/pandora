@@ -99,11 +99,7 @@ class AvailabilityController extends Controller
 
         $key = $request->key;
 
-        dd($request->all());
-
-
         $availabilities = Availability::where('referencia','like',"%$key%")->get();
-
 
         $availabilities = $availabilities->map(function($item){
             return [
