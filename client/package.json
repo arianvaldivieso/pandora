@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng serve --host=server.io",
-    "dev:prod": "ng serve",
+    "dev:prod": "ng serve --host=192.168.0.12",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
