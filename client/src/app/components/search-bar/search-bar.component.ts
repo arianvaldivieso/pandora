@@ -19,7 +19,7 @@ import { environment } from './../../../environments/environment';
 })
 export class SearchBarComponent implements OnInit {
 
-  apiUrl = environment.apiUrl+'/articles/autocomplete';
+  apiUrl = environment.apiUrl+'/availability/autocomplete';
   names = [];
   chips = [];
   normalChips = [];

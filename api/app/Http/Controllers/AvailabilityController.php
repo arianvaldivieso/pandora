@@ -14,7 +14,6 @@ class AvailabilityController extends Controller
     {
         $availabilities = Availability::all();
 
-
         $availabilities = $availabilities->map(function($item){
             return [
                 'id' => $item->id,
@@ -99,6 +98,8 @@ class AvailabilityController extends Controller
     {
 
         $key = $request->key;
+
+        dd($request->all());
 
 
         $availabilities = Availability::where('referencia','like',"%$key%")->get();
