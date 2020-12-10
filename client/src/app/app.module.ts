@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,16 +16,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select'; 
 import { MatTableModule } from '@angular/material/table'; 
 import { MatHeaderRow } from '@angular/material/table'; 
+import { MatInputModule } from '@angular/material/input'; 
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { NgxAutocompleteModule } from './ngx-autocomplete/ngx-autocomplete.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ShareButtonsConfig } from 'ngx-sharebuttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ChartsModule } from 'ng2-charts';
+import { NgxAutocompleteApiModule } from 'ngx-autocomplete-api';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 import { CountUpModule } from 'ngx-countup';
 
@@ -123,11 +127,12 @@ import { CardDashboardComponent } from './components/card-dashboard/card-dashboa
     MatButtonModule,
     MatSelectModule,
     MatTableModule,
+    MatInputModule,
 
     //MatHeaderRow,
 
     InfiniteScrollModule,
-    NgxAutocompleteModule,    
+    NgxAutocompleteApiModule,    
     ToastrModule.forRoot({
         preventDuplicates: true,
     }),
@@ -135,8 +140,11 @@ import { CardDashboardComponent } from './components/card-dashboard/card-dashboa
     ShareIconsModule,
     CarouselModule,
     ChartsModule,
-    CountUpModule
+    CountUpModule,
+    Ng2SearchPipeModule,
+    NgxChartsModule
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  }
   ],

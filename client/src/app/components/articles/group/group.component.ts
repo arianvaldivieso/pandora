@@ -10,6 +10,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class GroupComponent implements OnInit {
 
 	@Input() articles;
+  @Input() term = '';
   @Input() collections = [];
 
 	@Output() scroll = new EventEmitter<any>();

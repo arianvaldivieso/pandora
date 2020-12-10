@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row" *ngIf="!slug">
 			<div class="col-12">
-				<app-search-bar (collaboratorsOutput)="setCollaborators($event)" (filters)="searchArticles($event)"></app-search-bar>
+				<app-search-bar *ngIf="articles" (itemOutput)="changeTerm($event)" [items]="articles"></app-search-bar>
 			</div>
 		</div>
 
@@ -16,7 +16,7 @@
 			
 		</div>
 
-		<app-group (scroll)="onScroll()" [articles]="articles" [collections]="collections" *ngIf="articles"></app-group>	
+		<app-group (scroll)="onScroll()" [term]="term" [articles]="articles" [collections]="collections" *ngIf="articles"></app-group>	
 		
 	</div>
 

@@ -66,7 +66,7 @@ class AvailabilityController extends Controller
 
     public function history()
     {
-        $availabilities = History::all();
+        $availabilities = History::limit(20)->get();
 
 
         $availabilities = $availabilities->map(function($item){

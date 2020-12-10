@@ -109,4 +109,12 @@ export class ReloadComponent implements OnInit {
     this.collaborator = $event;
   }
 
+  term = '';
+
+  changeTerm($event){
+    console.log($event);
+
+    this.term = $event;
+  }
+
 }

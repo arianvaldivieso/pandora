@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input  } from '@angular/core';
-
+import { HttpRequestConfig } from 'ngx-autocomplete-api';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { CategoryService } from './../../services/category/category.service';
@@ -25,6 +25,8 @@ export class SearchBarComponent implements OnInit {
   normalChips = [];
   title = undefined;
 
+  term = '';
+
   categories:any = [];
   selectedCategories:any = [];
 
@@ -46,10 +48,11 @@ export class SearchBarComponent implements OnInit {
   tags = [];
 
   @Output() filters = new EventEmitter<any>();
-  @Output() collaboratorsOutput = new EventEmitter<any>();
+  @Output() itemOutput = new EventEmitter<any>();
 
   @Input() collaborator:any;
   @Input() collection:any;
+  @Input() items = [];
 
   searchForm: FormGroup;
 
@@ -69,7 +72,26 @@ export class SearchBarComponent implements OnInit {
     //this.getSubCategories();
     //this.getTypes();
     //this.getCollaborators();
-    this.createForm();
+    //this.createForm();
+  }
+
+  onKey($event){
+
+    this.itemOutput.emit(this.term);
+  }
+
+
+  value = 'Referencia';
+  config: HttpRequestConfig = {
+    method: 'GET',
+    dataApi: this.apiUrl,
+    fieldToDisplay: 'reference',
+    textInUrlToReplace: '<thisIsText>'
+  };
+  
+
+  mapFunction = (data) => {
+    return data.data.items
   }
 
   createForm() {
@@ -109,13 +131,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   async getCollaborators(){
-    let response:any = await this._collaborator.getCollaborators();
-
-    this.collaborators = response.data;
-
-    this.collaboratorsOutput.emit({
-      collaborators: this.collaborators
-    })
+    
   }
 
   getStorageTemp(key:string){
