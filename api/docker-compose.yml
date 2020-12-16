@@ -28,6 +28,7 @@ services:
       - DB_USERNAME_GP=sa
       - DB_DATABASE_GP=Pandora
       - DB_PASSWORD_GP=t3St#2021**
+      - APP_ENV=production
     depends_on:
       - database
     ports:

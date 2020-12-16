@@ -1,86 +1,35 @@
 .ngx-autocomplete {
-    width: 100%;
-    
     position: relative;
-    display: block;
-
-    > input{
-        border:none;
-        width: 100%;
-        padding-left: 10px;
-        height: 35px;
-        border-radius: 35px;
-        border:solid 1px #048fce;
-        
-        font-size: .8rem;
-        font-weight: 500;
-        color: #c0c0c1;
-    }
 }
 
 .ngx-autocomplete-suggestions {
     position: absolute;
     overflow-y: auto;
-    width: 100%;
+    max-height: 200px;
+    min-width: 250px;
+    border: 1px solid #C5C5C5;
+    box-shadow: 0px 1px 1px #cccccc;
     z-index: 9999;
-    background-color: white;
-    top: calc(100% + 10px);
-
 }
 
 .ngx-autocomplete-suggestions-list {
     list-style: none;
-    padding: 0;
 }
 
 .ngx-autocomplete-suggestions-list-item {
     border-style: none;
     cursor:pointer;
-    padding: 10px;
-    font-size: 0.8rem;
-    font-weight: 500;
+    padding: 5px;
 
     &:hover {
         background-color: #f2f2f2;
     }
 
     &.active {
-        background-color: #048fce;
-        color: white;
+        background-color: #e6e6e6;
     }
 }
 
 .highlighted {
     font-weight: bold;
 }
-
-
-/**
-
-.ngx-autocomplete input {
-    width: 100%;
-    border-radius: 35px;
-    height: 35px;
-    border:solid 1px #048fce;
-    padding-left: 10%;
-    font-size: .8rem;
-    font-weight: 500;
-    color: #c0c0c1;
-    position: relative;
-    display: block;
-    &::before{
-        content: ""; 
-        display: block;
-        width: 35px;
-        height: 100%;
-        background-color: red;
-        position: absolute;
-    }
-}
-
-.ngx-autocomplete .highlighted {
-    background: red;
-}
-
-
-**/

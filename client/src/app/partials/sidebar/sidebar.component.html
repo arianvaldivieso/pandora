@@ -1,14 +1,44 @@
-<div id="sidebar">
+<div id="sidebar" [ngClass]="{'active':active}">
+
+	<!--
 	<app-brand class="w-100"></app-brand>
-	
+	-->
+
+	<a [routerLink]="['/']">
+		<img src="http://www.colsein.com.co/pandora/client/dist/assets/images/logo.png" alt="pandora" class="img-fluid w-100">
+	</a>
 
 	<div id="menu" [ngClass]="{'hide-menu': false}">
 		<ul class="list-menu">
-			<li><a [routerLink]="['/']">Pandora</a></li>
-			<li><a [routerLink]="['/history']">Historico</a></li>
-			<li><a [routerLink]="['/reload']">Recarga</a></li>
+			<li><a mat-menu-item [routerLink]="['/']">Mi pandora</a></li>
+			<li><a mat-menu-item [routerLink]="['/history']">Histórico</a></li>
+			<li><a mat-menu-item [routerLink]="['/reload']">Recarga</a></li>
+			<li><a mat-menu-item [routerLink]="['/stats']">Estadísticas</a></li>
+			<li><a mat-menu-item [routerLink]="['/request']">Solicitar productos</a></li>
+
+			<li>
+				<a [routerLink]="['/clients']" mat-menu-item>
+        Indicadores (KPI'S)
+      	</a>
+    	</li>
+
+    	<li>
+	    	<a [routerLink]="['/users']" mat-menu-item *ngIf="user.role == 'admin'">
+	        Administrar usuarios	        
+	      </a>
+      </li>
+
+      <li>
+      	<button mat-menu-item (click)="logout()">
+	        Cerrar sesión
+	        
+	      </button>
+      </li>
+      
 		</ul>
 	</div>
+
+
 
 
 </div>

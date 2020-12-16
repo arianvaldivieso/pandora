@@ -1,122 +1,122 @@
-import { Component, NgModule, OnInit,CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Component, NgModule, OnInit } from '@angular/core';
 
-var multi = [
-  {
-    "name": "Germany",
-    "series": [
-      {
-        "name": "1990",
-        "value": 62000000
-      },
-      {
-        "name": "2010",
-        "value": 73000000
-      },
-      {
-        "name": "2011",
-        "value": 89400000
-      }
-    ]
-  },
+import { ArticleService } from './../../services/article/article.service';
+import { AuthService } from './../../services/auth/auth.service';
 
-  {
-    "name": "USA",
-    "series": [
-      {
-        "name": "1990",
-        "value": 250000000
-      },
-      {
-        "name": "2010",
-        "value": 309000000
-      },
-      {
-        "name": "2011",
-        "value": 311000000
-      }
-    ]
-  },
-
-  {
-    "name": "France",
-    "series": [
-      {
-        "name": "1990",
-        "value": 58000000
-      },
-      {
-        "name": "2010",
-        "value": 50000020
-      },
-      {
-        "name": "2011",
-        "value": 58000000
-      }
-    ]
-  },
-  {
-    "name": "UK",
-    "series": [
-      {
-        "name": "1990",
-        "value": 57000000
-      },
-      {
-        "name": "2010",
-        "value": 62000000
-      }
-    ]
-  }
-];
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-stast',
   templateUrl: './stast.component.html',
-  styleUrls: ['./stast.component.scss'],
+  styleUrls: ['./stast.component.scss']
 })
 export class StastComponent implements OnInit {
 
-	multi:any = []
-  view: any[] = [700, 300];
+  area;
 
-  // options
-  legend: boolean = true;
-  showLabels: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
-  showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Population';
-  timeline: boolean = true;
 
-  colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  selectedDate: {};
+
+  config1 = {
+    displayKey: "linea", // if objects array passed which key to be displayed defaults to description
+    search: true,
+    limitTo: 3,
+    searchPlaceholder: 'Buscar',
+    placeholder: 'linea'
   };
 
-  constructor() {
+  config2 = {
+    displayKey: "cliente", // if objects array passed which key to be displayed defaults to description
+    search: true,
+    limitTo: 3,
+    searchPlaceholder: 'Buscar',
+    placeholder: 'cliente'
+  };
+
+  lines = [];
+  line:any = []
+
+  clients = [];
+  client:any = [];
+
+  dateStart = ''
+  dateEnd = '';
+
+  linear;
+  linear2;
+
+  constructor(
+    private _article:ArticleService,
+    private _auth:AuthService
+  ){
+
+  }
+
+  async ngOnInit(){
+    let response:any = await this._article.getHistoryStash();
+    
+
+    this.getLines();
+
+    this.getClients();
+    this.filter();
+  }
+
+  async getLines(){
+    let response:any = await this._article.getLines();
+    this.lines = response.data;
+  }
+
+  async getClients(){
+
+    let user:any = await this._auth.me();
+
+    if (user.data.role == 'admin') {
+      let response:any = await this._article.getClients();
+      this.clients = response.data;
+    }
+
     
   }
 
-  onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  onChangeDate(type,$event){
+
+    let date = moment($event.value).format('YYYY-MM-DD');
+    
+    if (type == 'start') {
+      this.dateStart = date;
+    }else{
+      this.dateEnd = date;
+    }
+
+    this.filter();
+
   }
 
-  onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  async filter(){
+    let data = {
+      start: this.dateStart,
+      end: this.dateEnd,
+      line: (this.line) ? this.line.linea : null,
+      client: (this.client) ? this.client.cliente : null
+    };
+
+
+   let response:any = await this._article.filterStast(data);
+
+
+   this.linear = [response.data.linear];
+   this.linear2 = [response.data.linear2];
+   this.area = response.data.area.map((item) => {
+
+      if (item.name == '') {
+        item.name = 'indefinido';
+      }
+
+      return item;
+
+    }); 
   }
 
-  onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
-  }
-
-  ngOnInit(): void {
-  }
-
-  
-
+ 
 }

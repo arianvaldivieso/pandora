@@ -12,15 +12,9 @@ export class NgxAutocompleteService {
     suggestions$: Observable<any[]> = this.subject.asObservable();
     keyword: string;
 
-    suggestionPropName:string = '';
-
     constructor(private http: HttpClient) { }
 
-    highlightMatches = (finding: any): any => {
-
-      let data = finding;
-      finding = finding[this.suggestionPropName];
-      
+    highlightMatches = (finding: string): any => {
       const matched = finding.match(new RegExp(this.keyword, "gi"));
       const splitted = finding.split(new RegExp(this.keyword, "i"));
       let position = 1;
@@ -36,7 +30,6 @@ export class NgxAutocompleteService {
       let suggestion: any = {};
       suggestion.full = finding;
       suggestion.splitted = (<any>Object).entries(splittedObj);
-      suggestion.data = data;
       return suggestion;
     }
 
@@ -52,7 +45,6 @@ export class NgxAutocompleteService {
           const output = [];
           let staticDataSourceMapped = [];
           if (suggestionPropName) {
-            this.suggestionPropName = suggestionPropName;
             staticDataSourceMapped = staticDataSource.map(element => element[suggestionPropName]);
           } else {
             staticDataSourceMapped = staticDataSource;
@@ -85,7 +77,6 @@ export class NgxAutocompleteService {
                         paramName: string,
                         payloadPropName?: string,
                         suggestionPropName? : string): Observable<any[]> {
-        this.suggestionPropName = suggestionPropName;
         this.keyword = keyword;
         if (doQuery) {
           if (!/\S/.test(keyword)) {
@@ -96,7 +87,7 @@ export class NgxAutocompleteService {
                       map((response: any) => {
                         if (payloadPropName !== null) {
                           if (suggestionPropName !== null) {
-                            return response[payloadPropName].map(value => value).map(this.highlightMatches);
+                            return response[payloadPropName].map(value => value[suggestionPropName]).map(this.highlightMatches);
                           } else {
                             return response[payloadPropName].map(this.highlightMatches);
                           }

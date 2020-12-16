@@ -79,7 +79,7 @@
   	margin-top: 10px;
   	.image-article{
   		background-image: url('https://cdn.substack.com/image/fetch/h_600,c_limit,f_auto,q_auto:good/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F9c46ab74-11a7-4e99-84f9-ccfb6e2080a5_2024x1012.jpeg');
-  		background-size: cover;
+  		background-size: contain;
   		background-position: 0 0;
   		background-repeat: no-repeat;
   		width: 30%;
@@ -129,7 +129,7 @@
     .view-more{
       font-weight: 500;
       font-size: 0.7rem;
-      color: darken(#cacacb,3);
+      color: darken(#048fce,3);
       margin-left: auto;
       margin-right: 10px;
       cursor: pointer;

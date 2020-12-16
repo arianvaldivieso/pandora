@@ -29,6 +29,8 @@ export class LayoutComponent implements OnInit {
     avatar :'https://electronicssoftware.net/wp-content/uploads/user.png'
   }
 
+  sidebarActive = false;
+
   constructor(
     _location: Location,
     private _router: Router,
@@ -58,7 +60,7 @@ export class LayoutComponent implements OnInit {
     if (login) {
       let response:any = await this._auth.me();
       this.user = response.data;
-      this.user.avatar = (this.user.avatar) ? this.user.avatar : 'https://electronicssoftware.net/wp-content/uploads/user.png';
+      this.user.avatar = (this.user.avatar) ? this.user.avatar : 'http://www.colsein.com.co/pandora/client/dist/assets/images/user.png';
     }else{
       this._router.navigateByUrl("/login");
     }
@@ -86,27 +88,10 @@ export class LayoutComponent implements OnInit {
 
     this._router.navigateByUrl("/login");
 
-    /**
+  }
 
-    this._auth.logout().subscribe(() => {
-      this._storage.delete('pandora-login').subscribe(() => {});
-      this._storage.delete('pandora-token').subscribe(() => {});
-      this._storage.delete('pandora-views').subscribe(() => {});
-      this.user = {
-        id:false,
-        avatar :null
-      }
-
-
-      this._auth.syncroniceAuth();
-
-      this._snackBar.open('Coming out', 'close', {
-        duration: 2000,
-        horizontalPosition:'end'
-      });
-    })
-
-    **/
+  toggleSidebar(){
+    this.sidebarActive = !this.sidebarActive;
   }
 
 }

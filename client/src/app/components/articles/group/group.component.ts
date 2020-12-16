@@ -11,9 +11,11 @@ export class GroupComponent implements OnInit {
 
 	@Input() articles;
   @Input() term = '';
+  @Input() page = 1;
+  @Input() total = 0;
   @Input() collections = [];
 
-	@Output() scroll = new EventEmitter<any>();
+	@Output() pagination = new EventEmitter<any>();
 
   constructor(
   ) { }
@@ -24,10 +26,14 @@ export class GroupComponent implements OnInit {
 
   onScroll(){
 
-  	this.scroll.emit({
-  		scroll: true
-  	})
 
+  }
+
+  onChangePage($event){
+    this.page = $event;
+    this.pagination.emit({
+      page: $event
+    })
   }
 
 }

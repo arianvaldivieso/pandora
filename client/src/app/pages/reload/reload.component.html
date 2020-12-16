@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row" *ngIf="!slug">
 			<div class="col-12">
-				<app-search-bar *ngIf="articles" (itemOutput)="changeTerm($event)" [items]="articles"></app-search-bar>
+				<app-search-bar [key]="'reload'" *ngIf="articles" (itemOutput)="changeTerm($event)" [items]="articles"></app-search-bar>
 			</div>
 		</div>
 
@@ -16,7 +16,7 @@
 			
 		</div>
 
-		<app-group (scroll)="onScroll()" [term]="term" [articles]="articles" [collections]="collections" *ngIf="articles"></app-group>	
+		<app-group (pagination)="onChangePage($event)" [term]="term" [total]="total" [articles]="articles" *ngIf="articles"></app-group>
 		
 	</div>
 

@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { GlobalHttpInterceptorService } from './services/global-http-interceptor.service';
-
 
 import { MatSnackBarModule } from '@angular/material/snack-bar'; 
 import { MatDialogModule } from '@angular/material/dialog';
@@ -17,6 +17,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table'; 
 import { MatHeaderRow } from '@angular/material/table'; 
 import { MatInputModule } from '@angular/material/input'; 
+import { MatSidenavModule } from '@angular/material/sidenav'; 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker'; 
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -25,10 +29,13 @@ import { ShareButtonsConfig } from 'ngx-sharebuttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { ChartsModule } from 'ng2-charts';
 import { NgxAutocompleteApiModule } from 'ngx-autocomplete-api';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgxChartsModule, LineChartModule } from '@swimlane/ngx-charts';
+import { ChartsModule, BaseChartDirective } from 'ng2-charts';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxAutocompleteModule } from './ngx-autocomplete/ngx-autocomplete.module';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 
 import { CountUpModule } from 'ngx-countup';
@@ -55,7 +62,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { PresentationComponent } from './components/auth/presentation/presentation.component';
 import { HeaderAuthComponent } from './components/auth/header-auth/header-auth.component';
 import { DividerComponent } from './components/others/divider/divider.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { ArticleDialogComponent } from './components/dialogs/article-dialog/article-dialog.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LayoutComponent } from './partials/layout/layout.component';
@@ -73,8 +80,11 @@ import { ReloadComponent } from './pages/reload/reload.component';
 import { UsersComponent } from './pages/users/users.component';
 import { ClientsComponent } from './pages/clients/clients.component';
 import { StastComponent } from './pages/stast/stast.component';
-import { LineChartComponent } from './line-chart/line-chart.component';
 import { CardDashboardComponent } from './components/card-dashboard/card-dashboard.component';
+import { BasicChartComponent } from './components/basic-chart/basic-chart.component';
+import { LinearChartComponent } from './components/linear-chart/linear-chart.component';
+import { AreaChartComponent } from './components/area-chart/area-chart.component';
+import { RequestPremiunComponent } from './components/request-premiun/request-premiun.component';
 
 
 
@@ -109,7 +119,11 @@ import { CardDashboardComponent } from './components/card-dashboard/card-dashboa
     ReloadComponent,
     UsersComponent,
     ClientsComponent,
-    CardDashboardComponent
+    CardDashboardComponent,
+    StastComponent,
+    LinearChartComponent,
+    AreaChartComponent,
+    RequestPremiunComponent
   ],
   imports: [
     BrowserModule,
@@ -128,6 +142,11 @@ import { CardDashboardComponent } from './components/card-dashboard/card-dashboa
     MatSelectModule,
     MatTableModule,
     MatInputModule,
+    MatSidenavModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+
 
     //MatHeaderRow,
 
@@ -139,12 +158,12 @@ import { CardDashboardComponent } from './components/card-dashboard/card-dashboa
     ShareButtonsModule.withConfig(sharedConfig),
     ShareIconsModule,
     CarouselModule,
-    ChartsModule,
     CountUpModule,
     Ng2SearchPipeModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NgxPaginationModule,
+    SelectDropDownModule
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  }
   ],

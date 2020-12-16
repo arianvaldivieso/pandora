@@ -1,17 +1,59 @@
-<ngx-charts-line-chart
-  [view]="view"
-  [scheme]="colorScheme"
-  [legend]="legend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxis]="xAxis"
-  [yAxis]="yAxis"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [timeline]="timeline"
-  [results]="multi"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)"
-  >
-</ngx-charts-line-chart>
+<div id="discover mt-5">
+
+	<div class="container">
+
+
+		<div class="row justify-content-end align-items-center">
+
+			<div class="col-xl-3">
+				<mat-form-field class="w-100">
+				  <mat-label>Fecha de inicio</mat-label>
+				  <input matInput [matDatepicker]="picker" (dateChange)="onChangeDate('start', $event)">
+				  <mat-datepicker-toggle matSuffix [for]="picker">
+				    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+				  </mat-datepicker-toggle>
+				  <mat-datepicker #picker></mat-datepicker>
+				</mat-form-field>
+
+			</div>
+
+			<div class="col-xl-3">
+				<mat-form-field class="w-100">
+				  <mat-label>Fecha de fin</mat-label>
+				  <input matInput [matDatepicker]="pickerEnd" (dateChange)="onChangeDate('end', $event)">
+				  <mat-datepicker-toggle matSuffix [for]="pickerEnd">
+				    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+				  </mat-datepicker-toggle>
+				  <mat-datepicker #pickerEnd></mat-datepicker>
+				</mat-form-field>
+
+			</div>
+			<div class="col-xl-3">
+				<ngx-select-dropdown (change)="filter()" tabindex="0" [disabled]="false" [multiple]="false" [(ngModel)]="line"
+          [config]="config1" [options]="lines">
+        </ngx-select-dropdown>
+			</div>
+
+			<div class="col-xl-3" *ngIf="clients.length">
+				<ngx-select-dropdown (change)="filter()" tabindex="0" [disabled]="false" [multiple]="false" [(ngModel)]="client"
+          [config]="config2" [options]="clients">
+        </ngx-select-dropdown>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 col-md-6" *ngIf="linear">
+				<app-linear-chart [data]="linear" [title]="'valor en compras'"></app-linear-chart>
+			</div>
+
+			<div class="col-12 col-md-6" *ngIf="linear2">
+				<app-linear-chart [data]="linear2" [title]="'cantidad de transacciones'"></app-linear-chart>
+			</div>
+			<div class="col-12">
+				<app-area-chart [data]="area"></app-area-chart>
+			</div>
+		</div>
+		
+	</div>
+
+</div>
+

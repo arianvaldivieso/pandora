@@ -77,25 +77,17 @@ export class NgxAutocompleteComponent implements OnInit, ControlValueAccessor, A
     }
   }
 
-  fillTextBox(value: any) {
-
-    let data = value;
-    value = value.full;
-
+  fillTextBox(value: string) {
     this.doQuery = false;
     this.inputRef.nativeElement.value = value;
     this.innerValue = value;
-    this.propagateChange(data);
-    this.selected.emit(data);
+    this.propagateChange(value);
+    this.selected.emit(value);
     this.activeSuggestionIndex = undefined;
   }
 
   getClass(value: string, style: string): string {
-    let inputValue = (this.control.value != null && this.control.value.full) ? this.control.value.full : this.control.value; 
-
-    inputValue = (inputValue) ? inputValue : '';
-
-    if (value.toLowerCase() == inputValue.toLowerCase()) {
+    if (value.toLowerCase() == this.control.value.toLowerCase()) {
       return `highlighted ${style}`;
     } else {
       return style;
@@ -143,7 +135,7 @@ export class NgxAutocompleteComponent implements OnInit, ControlValueAccessor, A
       } else if (keyCode === 38 && this.activeSuggestionIndex > 0) {
         this.activeSuggestionIndex --;
       } else if (keyCode === 13) {
-        this.fillTextBox(this.suggestions[this.activeSuggestionIndex]);
+        this.fillTextBox(this.suggestions[this.activeSuggestionIndex].full);
       }
     });
   }

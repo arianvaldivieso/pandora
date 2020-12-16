@@ -1,0 +1,19 @@
+<div style="min-height: 400px" class="mt-5">
+	<ngx-charts-line-chart
+  [autoScale]="true"
+  [scheme]="colorScheme"
+  [legend]="legend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxis]="xAxis"
+  [yAxis]="yAxis"
+  [xAxisLabel]="title"
+  [yAxisLabel]="yAxisLabel"
+  [timeline]="timeline"
+  [results]="data"
+  (select)="onSelect($event)"
+  (activate)="onActivate($event)"
+  (deactivate)="onDeactivate($event)"
+  >
+</ngx-charts-line-chart>
+</div>

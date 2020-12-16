@@ -13,6 +13,7 @@ import { ReloadComponent } from './pages/reload/reload.component';
 import { UsersComponent } from './pages/users/users.component';
 import { ClientsComponent } from './pages/clients/clients.component';
 import { StastComponent } from './pages/stast/stast.component';
+import { RequestPremiunComponent } from './components/request-premiun/request-premiun.component';
 
 const routes: Routes = [
 
@@ -67,30 +68,28 @@ const routes: Routes = [
     ]
 
   },
+
   { 
-    path: 'collaborator', component: LayoutComponent,
+    path: 'request', component: LayoutComponent,
     children: [
-        {
-          path: ':slug',
-          component: CollaboratorDetailComponent
-        }
+      { path: '', component: RequestPremiunComponent},
     ]
 
-  },  
+  },
+ 
 
   { 
-    path: 'collections', component: LayoutComponent,
+    path: 'users', component: LayoutComponent,
     children: [
         {
-          path: ':slug',
-          component: DiscoverComponent
+          path: 'register',
+          component: RegisterComponent
         }
     ]
 
   },  
 
 	{ path: 'login', component: LoginComponent },
-	{ path: 'users/register', component: RegisterComponent },
   { path: '',   redirectTo: '/pandora', pathMatch: 'full' }
 
 ];

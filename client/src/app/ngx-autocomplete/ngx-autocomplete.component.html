@@ -9,7 +9,7 @@
         <li class="ngx-autocomplete-suggestions-list-item"
             [ngClass]='{ "active" : i === activeSuggestionIndex }'
             *ngFor="let suggestion of suggestions; let i = index" 
-            (click)="fillTextBox(suggestion)">
+            (click)="fillTextBox(suggestion.full)">
             <span [ngClass]="getClass(elem[1].value, elem[1].class)" *ngFor="let elem of suggestion.splitted">{{elem[1].value}}</span>
         </li>
       </ul>

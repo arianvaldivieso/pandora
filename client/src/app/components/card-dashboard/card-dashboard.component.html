@@ -8,7 +8,11 @@
 	}"
 	
 >
-    <h4  [ngStyle]="{'color':data.color}" style="cursor: pointer;" class="text-capitalize">{{data.title}} <span [countUp]="data.total">0</span>{{data.key}}</h4>
+    <h4  [ngStyle]="{'color':data.color}" style="cursor: pointer;">
+    	<span *ngIf="data.title != 'c02'" class="text-capitalize">{{data.title}}</span>
+    	<span *ngIf="data.title == 'c02'">CO<sub>2</sub></span>
+    </h4>
+    <h5><span *ngIf="data.key == '$'">{{data.key}}</span> <span [countUp]="data.total">0</span><span *ngIf="data.key != '$'">{{data.key}}</span></h5>
 
     <div *ngIf=data.data>
 

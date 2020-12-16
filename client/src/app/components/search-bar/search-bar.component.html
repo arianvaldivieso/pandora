@@ -1,12 +1,20 @@
 <div id="search-bar">
 	<div class="search-bar">
+
 		<div>
 			<div class="row d-flex justify-content-center">
 				<div class="col-xl-12 col-12">
-					<mat-form-field class="w-100">
-			    <mat-label>Referencia</mat-label>
-				    <input matInput (keyup)="onKey($event)" [(ngModel)]="term">
-				  </mat-form-field>	
+					<form class="example-form">
+					  <mat-form-field class="w-100">
+					    <input type="text"
+					           placeholder="Introduce una referencia"
+					           matInput
+					           (keyup)="onKey($event)"
+					           >
+					    
+					  </mat-form-field>
+					</form>
+
 				</div>
 			</div>	
 		</div>

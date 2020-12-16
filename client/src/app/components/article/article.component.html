@@ -16,10 +16,10 @@
 					{{article.description}}
 				</div>
 				<div class="lenght-article" *ngIf="article.ubication"><span class="">Ubicación: {{article.ubication}}</span></div>
-				<div class="lenght-article"><span class="">Precio: {{article.unit_price}}$</span></div>
-				<div class="lenght-article" *ngIf="article.availability"><span class="">Cantidad: {{article.availability}}</span></div>
+				<div class="lenght-article"><span class="">Precio: {{article.unit_price | currency}}</span></div>
+				<div class="lenght-article" *ngIf="article.availability"><span class="">Cantidad: {{article.availability}} {{article.unit}}</span></div>
 				
-				<div class="lenght-article" *ngIf="article.garanty"><span class="">Garantia: {{article.garanty}}$</span></div>
+				<div class="lenght-article" *ngIf="article.garanty"><span class="">Garantia: ${{article.garanty}}</span></div>
 			</div>
 		</div>
 
@@ -28,7 +28,7 @@
 			<app-tag [name]="'manual'" [link]="article.manual"></app-tag>
 			<app-tag [name]="'video'" *ngIf="article.video" [link]="article.video"></app-tag>
 			<!--<app-tag [name]="tag.name" *ngFor="let tag of article.tags | slice:0:2"></app-tag>-->
-			<span class="view-more" (click)="viewMore()">{{article.client}}</span>
+			<span class="view-more">{{article.client}}</span>
 		</div>
 	</div>
 

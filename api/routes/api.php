@@ -62,30 +62,43 @@ Route::group([ 'middleware' => 'auth:api'], function() {
         'create', 'show'
     ]);
 
-     Route::resource('users', UserController::class)->except([
+    Route::resource('users', UserController::class)->except([
         'create', 'show'
     ]);
 
+    Route::get('lines', [ AvailabilityController::class,'lines']);    
+    Route::get('clients', [ AvailabilityController::class,'clients']);
+    Route::get('articles', [ AvailabilityController::class,'articlesReferences']);
+    
+    Route::post('filter-stast', [ AvailabilityController::class,'filterStast']);
+    Route::post('request', [ AvailabilityController::class,'request']);
+    
+
+
+    Route::group([
+        'prefix' => 'availability'
+    ], function () {
+      Route::get('', [ AvailabilityController::class,'index']);    
+      Route::get('autocomplete', [ AvailabilityController::class,'autocomplete']);    
+    });
+
+    Route::group([
+        'prefix' => 'history'
+    ], function () {
+      Route::get('', [ AvailabilityController::class,'history']);   
+        Route::get('autocomplete', [ AvailabilityController::class,'autocompleteHistory']);  
+        Route::get('stast', [ AvailabilityController::class,'stast']);       
+    });
+
+    Route::group([
+        'prefix' => 'reload'
+    ], function () {
+      Route::get('', [ AvailabilityController::class,'reload']);   
+      Route::get('autocomplete', [ AvailabilityController::class,'autocompleteReload']);        
+    });
+
 });
 
 
 
 
-Route::group([
-    'prefix' => 'availability'
-], function () {
-	Route::get('', [ AvailabilityController::class,'index']);    
-  Route::get('autocomplete', [ AvailabilityController::class,'autocomplete']);    
-});
-
-Route::group([
-    'prefix' => 'history'
-], function () {
-	Route::get('', [ AvailabilityController::class,'history']);      
-});
-
-Route::group([
-    'prefix' => 'reload'
-], function () {
-	Route::get('', [ AvailabilityController::class,'reload']);      
-});

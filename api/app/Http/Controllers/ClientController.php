@@ -13,11 +13,10 @@ class ClientController extends Controller
 		if (auth()->user()->role == 'admin') {
 			$clients = Client::all();
 		}else{
-			$client = Client::where('id',auth()->user()->client_id)->get();
+			$clients = Client::where('id',auth()->user()->client_id)->get();
 		}
 
 	
-
 		$time = $clients->sum('tiempo');
 		$co2 = $clients->sum('co2');
 		$discount = $clients->sum('descuento');
@@ -33,14 +32,14 @@ class ClientController extends Controller
 			[
 				'title' => 'c02',
 				'color' => '#434343',
-				'icons' => 'leads',
+				'icons' => 'active',
 				'total' => $co2,
 				'key' => 'Kg',
 			],
 			[
 				'title' => 'Descuento',
 				'color' => '#434343',
-				'icons' => 'leads',
+				'icons' => 'sales',
 				'total' => $discount,
 				'key' => '$',
 			]
