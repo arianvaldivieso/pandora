@@ -11,7 +11,7 @@ services:
     ports:
       - 3307:3306
     volumes:
-      - mydb-db:/var/lib/mysql
+      - mydb-db-api:/var/lib/mysql
   pandora:
     tty: true
     image: jjuanrivvera99/ubuntu-apache-php-sqlserver
@@ -38,4 +38,4 @@ services:
     # privileged: true # Privileged mode could be required to run this container under Windows
     # 
 volumes:
-  mydb-db:
+  mydb-db-api:
