@@ -327,7 +327,7 @@ class AvailabilityController extends Controller
 
         $linear2 =  Reload::select(
             DB::raw('sum(cantidad_solicitada) as value'),
-            'fecha_recarga as name',
+            'fecha_recarga as name'
         )->orderBy('name')->groupBy('name');
 
         if (auth()->user()->role != 'admin') {
