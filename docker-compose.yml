@@ -34,7 +34,7 @@ services:
     ports:
       - 9002:80
     volumes:
-      - ./api:/var/www/
+      - ./api/:/var/www/
     # privileged: true # Privileged mode could be required to run this container under Windows
     # 
 volumes:
