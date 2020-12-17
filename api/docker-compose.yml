@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  database_pandora:
+  database_pandora_2:
     image: 'docker.io/bitnami/mariadb:10.2-debian-10'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
