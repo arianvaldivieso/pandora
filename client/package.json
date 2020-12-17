@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:prod": "ng build --prod --deploy-url=http://www.colsein.com.co/pan/client/dist/ --base-href=http://www.colsein.com.co/pan/client/dist/",
-    "build:dev": "ng build --prod --base-href=http://server.io/pan/client/dist/"
+    "build:prod": "ng build --prod --deploy-url=http://www.colsein.com.co/pandora --base-href=http://www.colsein.com.co/pandora && mv dist ../../pandora",
+    "build:dev": "ng build --prod --base-href=http://server.io/pandora"
   },
   "private": true,
   "dependencies": {

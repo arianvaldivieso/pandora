@@ -300,7 +300,7 @@ class AvailabilityController extends Controller
         $client = Client::find(auth()->user()->client_id);
         $linear =  Reload::select(
             DB::raw('sum(precio) as value'),
-            DB::raw("DATE_FORMAT(fecha_recarga,'%M %Y') as name")
+            'fecha_recarga as name'
         )->orderBy('name')->groupBy('name');
 
         if (auth()->user()->role != 'admin') {
@@ -319,10 +319,16 @@ class AvailabilityController extends Controller
             $linear = $linear->where('cliente',$request->client);
         }
 
+        $linear = $linear->get()->map(function($item){
+            $item->name = explode('-',$item->name);
+            $item->name = $item->name[0].'-'.$item->name[1];
+            return $item;
+        });
+
         $linear2 =  Reload::select(
             DB::raw('sum(cantidad_solicitada) as value'),
-            DB::raw("DATE_FORMAT(fecha_recarga,'%M %Y') as name")
-        )->groupBy('name');
+            'fecha_recarga as name',
+        )->orderBy('name')->groupBy('name');
 
         if (auth()->user()->role != 'admin') {
             $linear2 = $linear2->where('cliente',$client->cliente);
@@ -339,6 +345,12 @@ class AvailabilityController extends Controller
         if ($request->client) {
             $linear2 = $linear2->where('cliente',$request->client);
         }
+
+        $linear2 = $linear2->get()->map(function($item){
+            $item->name = explode('-',$item->name);
+            $item->name = $item->name[0].'-'.$item->name[1];
+            return $item;
+        });
 
 
         if (auth()->user()->role == 'admin') {
@@ -359,11 +371,11 @@ class AvailabilityController extends Controller
             'data' => [
                 'linear' => [
                     'name' => 'Valor en compras',
-                    'series' => $linear->get()
+                    'series' => $linear
                 ],
                 'linear2' => [
                     'name' => 'Cantidad de transacciones',
-                    'series' => $linear2->get()
+                    'series' => $linear2
                 ],
                 'area' => $history->get()
             ]
