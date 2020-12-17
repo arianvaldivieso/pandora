@@ -24,8 +24,8 @@
 		</div>
 
 		<div class="article-tags">
-			<app-tag [name]="'datasheet'" [link]="article.datasheet"></app-tag>
-			<app-tag [name]="'manual'" [link]="article.manual"></app-tag>
+			<app-tag [name]="'datasheet'"  *ngIf="article.datasheet" [link]="article.datasheet"></app-tag>
+			<app-tag [name]="'manual'"  *ngIf="article.manual" [link]="article.manual"></app-tag>
 			<app-tag [name]="'video'" *ngIf="article.video" [link]="article.video"></app-tag>
 			<!--<app-tag [name]="tag.name" *ngFor="let tag of article.tags | slice:0:2"></app-tag>-->
 			<span class="view-more">{{article.client}}</span>

@@ -321,7 +321,7 @@ class AvailabilityController extends Controller
 
         $linear = $linear->get()->map(function($item){
             $item->name = explode('-',$item->name);
-            $item->name = $item->name[0].'-'.$item->name[1];
+            $item->name = $item->name[0].'-'.(isset($item->name[1])) ? $item->name[1] : '';
             return $item;
         });
 
@@ -348,7 +348,7 @@ class AvailabilityController extends Controller
 
         $linear2 = $linear2->get()->map(function($item){
             $item->name = explode('-',$item->name);
-            $item->name = $item->name[0].'-'.$item->name[1];
+            $item->name = $item->name[0].'-'.(isset($item->name[1])) ? $item->name[1] : '';
             return $item;
         });
 

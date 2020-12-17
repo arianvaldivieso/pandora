@@ -49,6 +49,10 @@ export class SidebarComponent implements OnInit {
 
   }
 
+  toggleMenu(){
+    this.active = false;
+  }
+
   
 
 }

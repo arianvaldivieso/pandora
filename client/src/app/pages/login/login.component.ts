@@ -64,7 +64,9 @@ export class LoginComponent implements OnInit {
 	  	if (response.success) {
 	  		this._auth.setSession(response);
 	  		this._router.navigateByUrl("/");
-	  	}  	
+	  	}else{
+	  		this._notify.error('Credenciales invalidas');
+	  	}
 	  });
 
 	}
