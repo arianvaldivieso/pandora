@@ -67,7 +67,7 @@ Route::group([ 'middleware' => 'auth:api'], function() {
     ]);
 
     Route::get('lines', [ AvailabilityController::class,'lines']);    
-    Route::get('clients', [ AvailabilityController::class,'clients']);
+    Route::get('clients-2', [ AvailabilityController::class,'clients']);
     Route::get('articles', [ AvailabilityController::class,'articlesReferences']);
     
     Route::post('filter-stast', [ AvailabilityController::class,'filterStast']);

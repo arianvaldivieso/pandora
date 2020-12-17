@@ -15,7 +15,6 @@ class ClientController extends Controller
 		}else{
 			$clients = Client::where('id',auth()->user()->client_id)->get();
 		}
-
 	
 		$time = $clients->sum('tiempo');
 		$co2 = $clients->sum('co2');
