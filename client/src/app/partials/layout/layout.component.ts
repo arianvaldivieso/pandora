@@ -60,7 +60,7 @@ export class LayoutComponent implements OnInit {
     if (login) {
       let response:any = await this._auth.me();
       this.user = response.data;
-      this.user.avatar = (this.user.avatar) ? this.user.avatar : 'http://www.colsein.com.co/pandora/client/dist/assets/images/user.png';
+      this.user.avatar = (this.user.avatar) ? this.user.avatar : 'http://www.colsein.com.co/pandora/assets/images/user.png';
     }else{
       this._router.navigateByUrl("/login");
     }
