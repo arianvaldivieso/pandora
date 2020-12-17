@@ -301,7 +301,7 @@ class AvailabilityController extends Controller
         $linear =  Reload::select(
             DB::raw('sum(precio) as value'),
             DB::raw('fecha_recarga as name')
-        )->orderBy('name')->groupBy('name');
+        )->orderBy('fecha_recarga')->groupBy('fecha_recarga');
 
         if (auth()->user()->role != 'admin') {
             $linear = $linear->where('cliente',$client->cliente);
@@ -328,7 +328,7 @@ class AvailabilityController extends Controller
         $linear2 =  Reload::select(
             DB::raw('sum(cantidad_solicitada) as value'),
             DB::raw('fecha_recarga as name')
-        )->orderBy('name')->groupBy('name');
+        )->orderBy('fecha_recarga')->groupBy('fecha_recarga');
 
         if (auth()->user()->role != 'admin') {
             $linear2 = $linear2->where('cliente',$client->cliente);
