@@ -65,7 +65,6 @@ Route::group([ 'middleware' => 'auth:api'], function() {
         'create', 'show'
     ]);
 
-    Route::get('clients', [ ClientController::class,'index']);
     Route::get('lines', [ AvailabilityController::class,'lines']);    
     Route::get('clients-2', [ AvailabilityController::class,'clients']);
     Route::get('articles', [ AvailabilityController::class,'articlesReferences']);
