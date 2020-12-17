@@ -16,6 +16,8 @@ class ClientController extends Controller
 			$clients = Client::where('id',auth()->user()->client_id)->get();
 		}
 
+		dd($clients);
+
 	
 		$time = $clients->sum('tiempo');
 		$co2 = $clients->sum('co2');
