@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  database_pandora_2:
+  sqlserver_pandora:
     image: 'docker.io/bitnami/mariadb:10.2-debian-10'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
@@ -12,12 +12,12 @@ services:
       - 3307:3306
     volumes:
       - mydb-db-api:/var/lib/mysql
-  pandora:
+  web:
     tty: true
     image: jjuanrivvera99/ubuntu-apache-php-sqlserver
     environment:
       - DB_CONNECTION=mysql
-      - DB_HOST=database_pandora_2
+      - DB_HOST=sqlserver_pandora
       - DB_USERNAME=admin
       - DB_DATABASE=pandora_api
       - DB_PASSWORD=pandora_33klwZ_76
@@ -30,7 +30,7 @@ services:
       - DB_PASSWORD_GP=t3St#2021**
       - APP_ENV=production
     depends_on:
-      - database_pandora_2
+      - sqlserver_pandora
     ports:
       - 9002:80
     volumes:
