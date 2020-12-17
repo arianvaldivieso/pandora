@@ -14,7 +14,7 @@
 			<li><a mat-menu-item [routerLink]="['/history']">Histórico</a></li>
 			<li><a mat-menu-item [routerLink]="['/reload']">Recarga</a></li>
 			<li><a mat-menu-item [routerLink]="['/stats']">Estadísticas</a></li>
-			<li><a mat-menu-item [routerLink]="['/request']">Solicitar productos</a></li>
+			<li><a mat-menu-item [routerLink]="['/request']" mat-menu-item *ngIf="user.role != 'admin'">Solicitar productos</a></li>
 
 			<li>
 				<a [routerLink]="['/clients']" mat-menu-item>
