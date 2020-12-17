@@ -42,7 +42,7 @@ export class ArticleService extends MasterService {
   }
 
   async getClients(){
-    return this._http.get(`${this.baseUrl}/clients`,await this.getOptions()).toPromise();
+    return this._http.get(`${this.baseUrl}/clients-2`,await this.getOptions()).toPromise();
   }
 
   async filterStast(filter){
