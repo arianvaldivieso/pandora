@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { HttpClient } from '@angular/common/http';
 
+import { ToastrService } from 'ngx-toastr';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +11,8 @@ export class MasterService {
 
   constructor(
   	public _storage: StorageMap,
-  	public _http: HttpClient
+  	public _http: HttpClient,
+    private _notify: ToastrService
   ) { 
 
   }

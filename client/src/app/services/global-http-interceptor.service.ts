@@ -21,9 +21,9 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
 
 
         if (error.status == 500 || error.status == 0) {
-          this._notify.error('We had a problem, try again later');
+          this._notify.error('Ocurrio un problema, intente nuevamente');
         }else if(error.status == 401){
-          this._notify.error('Your session expired');
+          this._notify.error('Tu sesión ha expirado');
         }
 
         //console.error(error);

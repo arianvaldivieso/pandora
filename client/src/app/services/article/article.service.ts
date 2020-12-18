@@ -4,6 +4,7 @@ import { environment } from './../../../environments/environment';
 import { MasterService } from './../master.service';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,18 +13,21 @@ export class ArticleService extends MasterService {
   baseUrl = environment.apiUrl;
 
   async getArticles(filters,page = 1){
+    this._notify.info('Cargando información');
 
     filters = new URLSearchParams(filters).toString();
     return this._http.get(`${this.baseUrl}/availability?page=${page}&${filters}`,await this.getOptions()).toPromise();
   }
 
   async getHistory(filters,page = 1){
+    this._notify.info('Cargando información');
 
     filters = new URLSearchParams(filters).toString();
     return this._http.get(`${this.baseUrl}/history?page=${page}&${filters}`,await this.getOptions()).toPromise();
   }
 
   async getReload(filters,page = 1){
+    this._notify.info('Cargando información');
 
     filters = new URLSearchParams(filters).toString();
     return this._http.get(`${this.baseUrl}/reload?page=${page}&${filters}`,await this.getOptions()).toPromise();
@@ -42,6 +46,7 @@ export class ArticleService extends MasterService {
   }
 
   async getClients(){
+    this._notify.info('Cargando información');
     return this._http.get(`${this.baseUrl}/clients-2`,await this.getOptions()).toPromise();
   }
 
@@ -50,6 +55,7 @@ export class ArticleService extends MasterService {
   }
 
   async getArticlesReferences(){
+    this._notify.info('Cargando información');
     return this._http.get(`${this.baseUrl}/articles`,await this.getOptions()).toPromise();
   }
 
