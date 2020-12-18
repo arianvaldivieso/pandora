@@ -410,7 +410,6 @@ class AvailabilityController extends Controller
                 'unit_price' => $item->precio,
                 'datasheet' => $item->datasheet,
                 'manual' => $item->catalogo,
-                'cantidad_stock' => $item->cantidad_stock,
                 'date' => 'fecha de ingreso: '.$item->fecha_ingreso,
                 'client' => $item->cliente,
                 'line' => $item->linea
