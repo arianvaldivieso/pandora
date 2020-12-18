@@ -30,7 +30,7 @@ export class LayoutComponent implements OnInit {
   }
 
   sidebarActive = false;
-
+  t = false;
   constructor(
     _location: Location,
     private _router: Router,
@@ -59,6 +59,7 @@ export class LayoutComponent implements OnInit {
     let login = await this._auth.hasLogin();
     if (login) {
       let response:any = await this._auth.me();
+      this.t = true;
       this.user = response.data;
       this.user.avatar = (this.user.avatar) ? this.user.avatar : 'http://www.colsein.com.co/pandora/assets/images/user.png';
     }else{
