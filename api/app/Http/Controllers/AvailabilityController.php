@@ -39,9 +39,10 @@ class AvailabilityController extends Controller
                 'ubication' => $item->ubicacion,
                 'unit_price' => $item->precio_unitario,
                 'datasheet' => $item->datasheet,
-                'manual' => $item->manual,
+                'manual' => $item->catalogo,
                 'date' => 'fecha de ingreso: '.$item->fecha_ingreso,
-                'client' => $item->cliente
+                'client' => $item->cliente,
+                'line' => $item->linea
             ];
         });
 
@@ -78,6 +79,7 @@ class AvailabilityController extends Controller
                 'manual' => $item->catalogo,
                 'date' => 'fecha de recarga: '.$item->fecha_recarga,
                 'client' => $item->cliente,
+                'line' => $item->linea
             ];
         });
 
@@ -115,11 +117,12 @@ class AvailabilityController extends Controller
                 'ubication' => $item->ubicacion,
                 'unit_price' => $item->precio_unitario,
                 'datasheet' => $item->datasheet,
-                'manual' => $item->manual,
+                'manual' => $item->catalogo,
                 'date' => 'fecha de compra: '.$item->fecha_compra,
                 'client' => $item->cliente,
                 'garanty' => $item->garantia,
-                'video' => $item->video
+                'video' => $item->video,
+                'line' => $item->linea
             ];
         });
 
@@ -136,11 +139,11 @@ class AvailabilityController extends Controller
         $key = $request->keyword;
 
         if (auth()->user()->role == 'admin') {
-            $availabilities = Availability::where('referencia','like',"%$key%")->get();
+            $availabilities = Availability::where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%")->get();
             $total = $availabilities->count();
         }else{
             $client = Client::find(auth()->user()->client_id);
-            $availabilities = Availability::where('cliente',$client->cliente)->where('referencia','like',"%$key%")->get();
+            $availabilities = Availability::where('cliente',$client->cliente)->where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%")->get();
             $total = $availabilities->where('cliente',$client->cliente)->count();
         }
 
@@ -155,9 +158,10 @@ class AvailabilityController extends Controller
                 'ubication' => $item->ubicacion,
                 'unit_price' => $item->precio_unitario,
                 'datasheet' => $item->datasheet,
-                'manual' => $item->manual,
+                'manual' => $item->catalogo,
                 'date' => 'fecha de ingreso: '.$item->fecha_ingreso,
-                'client' => $item->cliente
+                'client' => $item->cliente,
+                'line' => $item->linea
             ];
         });
 
@@ -170,19 +174,24 @@ class AvailabilityController extends Controller
 
 
     function autocompleteHistory(Request $request)
-    {
+    {   
 
         $key = $request->keyword; 
 
         if (auth()->user()->role == 'admin') {
-            $history = History::where('referencia','like',"%$key%")->get();
+            $history = History::where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%");
             $total = $history->count();
         }else{
             $client = Client::find(auth()->user()->client_id);
-            $history = History::where('cliente',$client->cliente)->where('referencia','like',"%$key%")->get();
+            $history = History::where('cliente',$client->cliente)->where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%");
             $total = $history->where('cliente',$client->cliente)->count();
         }
 
+        if ($request->start and $request->end){
+            $history = $history->whereBetween('fecha_compra', [$request->start, $request->end])->get();
+        }else{
+            $history = $history->get();
+        }
 
         $history = $history->map(function($item){
 
@@ -198,11 +207,12 @@ class AvailabilityController extends Controller
                 'ubication' => $item->ubicacion,
                 'unit_price' => $item->precio_unitario,
                 'datasheet' => $item->datasheet,
-                'manual' => $item->manual,
+                'manual' => $item->catalogo,
                 'date' => 'fecha de compra: '.$item->fecha_compra,
                 'client' => $item->cliente,
                 'garanty' => $item->garantia,
-                'video' => $item->video
+                'video' => $item->video,
+                'line' => $item->linea
             ];
         });
 
@@ -219,11 +229,11 @@ class AvailabilityController extends Controller
         $key = $request->keyword; 
 
         if (auth()->user()->role == 'admin') {
-            $history = Reload::where('referencia','like',"%$key%")->get();
+            $history = Reload::where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%")->get();
             $total = $history->count();
         }else{
             $client = Client::find(auth()->user()->client_id);
-            $history = Reload::where('cliente',$client->cliente)->where('referencia','like',"%$key%")->get();
+            $history = Reload::where('cliente',$client->cliente)->where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%")->get();
             $total = $history->where('cliente',$client->cliente)->count();
         }
 
@@ -242,6 +252,7 @@ class AvailabilityController extends Controller
                 'manual' => $item->catalogo,
                 'date' => 'fecha de recarga: '.$item->fecha_recarga,
                 'client' => $item->cliente,
+                'line' => $item->linea
             ];
         });
 
@@ -298,17 +309,17 @@ class AvailabilityController extends Controller
     function filterStast(Request $request){
 
         $client = Client::find(auth()->user()->client_id);
-        $linear =  Reload::select(
-            DB::raw('sum(precio) as value'),
-            DB::raw('fecha_recarga as name')
-        )->orderBy('fecha_recarga')->groupBy('fecha_recarga');
+        $linear =  History::select(
+            DB::raw('sum(precio_unitario) as value'),
+            DB::raw('fecha_compra as name')
+        )->orderBy('fecha_compra')->groupBy('fecha_compra');
 
         if (auth()->user()->role != 'admin') {
             $linear = $linear->where('cliente',$client->cliente);
         }
 
         if ($request->start and $request->end) {
-            $linear = $linear->whereBetween('fecha_recarga', [$request->start, $request->end]);
+            $linear = $linear->whereBetween('fecha_compra', [$request->start, $request->end]);
         }
 
         if ($request->line) {
@@ -325,17 +336,17 @@ class AvailabilityController extends Controller
             return $item;
         });
 
-        $linear2 =  Reload::select(
-            DB::raw('sum(cantidad_solicitada) as value'),
-            DB::raw('fecha_recarga as name')
-        )->orderBy('fecha_recarga')->groupBy('fecha_recarga');
+        $linear2 =  History::select(
+            DB::raw('sum(cantidad_comprada) as value'),
+            DB::raw('fecha_compra as name')
+        )->orderBy('fecha_compra')->groupBy('fecha_compra');
 
         if (auth()->user()->role != 'admin') {
             $linear2 = $linear2->where('cliente',$client->cliente);
         }
 
         if ($request->start and $request->end) {
-            $linear2 = $linear2->whereBetween('fecha_recarga', [$request->start, $request->end]);
+            $linear2 = $linear2->whereBetween('fecha_compra', [$request->start, $request->end]);
         }
 
         if ($request->line) {
@@ -385,7 +396,25 @@ class AvailabilityController extends Controller
 
     function articlesReferences(){
 
-        $article = Article::select('referencia','id','cantidad_stock')->get();
+        $article = Article::all();
+
+        $article = $article->map(function($item){
+            return [
+                'id' => $item->id,
+                'reference' => $item->referencia,
+                'description' => $item->descripcion,
+                'image' => $item->imagen,
+                'unit' => $item->unidades,
+                'availability' => $item->cantidad_stock,
+                'ubication' => $item->ubicacion,
+                'unit_price' => $item->precio,
+                'datasheet' => $item->datasheet,
+                'manual' => $item->catalogo,
+                'date' => 'fecha de ingreso: '.$item->fecha_ingreso,
+                'client' => $item->cliente,
+                'line' => $item->linea
+            ];
+        });
 
         return response()->json([
             'success' => true,
@@ -422,7 +451,7 @@ class AvailabilityController extends Controller
             $data->fecha_recarga = $temp->fecha_recarga;
             $data->unidades = $temp->unidades;
             $data->precio = $temp->precio;
-            $data->cliente = $temp->cliente;
+            $data->cliente = $client->cliente;
             $data->cantidad_solicitada = $temp->cantidad_solicitada;
             $data->save();
         }

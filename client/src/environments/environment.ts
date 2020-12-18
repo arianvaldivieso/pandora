@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl:'http://www.colsein.com.co:9002/api'
+  apiUrl:'http://server.io:8000/api'
 };
 
 /*

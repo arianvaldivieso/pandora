@@ -18,4 +18,11 @@ export class UserService extends MasterService{
   async store(data){
     return this._http.post(this.baseUrl+'/users',data,await this.getOptions()).toPromise();
   }
+
+  async deleteUser(data){
+  	data = {
+  		id:data
+  	}
+    return this._http.post(this.baseUrl+'/users/delete',data,await this.getOptions()).toPromise();
+  }
 }

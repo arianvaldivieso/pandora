@@ -13,6 +13,19 @@
 								
 								<div class="row">
 
+
+									<div class="col-xl-12 col-12">
+										<div class="form-group">
+											<ngx-select-dropdown (change)="selectionChanged($event)" tabindex="0" [disabled]="false" [multiple]="false" [(ngModel)]="reference"
+							          [config]="config" [options]="references">
+							        </ngx-select-dropdown>
+										</div>
+										
+							    </div>
+
+							    <div class="col-12 mb-5" *ngIf="show">
+							    	<app-article  [article]="reference"></app-article>
+							    </div>
 									
 							    <div class="col-12">
 							    	<div class="form-group">
@@ -21,12 +34,7 @@
 							    	
 							    </div>	
 
-							    <div class="col-xl-12 col-12">
-
-										<ngx-select-dropdown tabindex="0" [disabled]="false" [multiple]="false" [(ngModel)]="reference"
-						          [config]="config" [options]="references">
-						        </ngx-select-dropdown>
-							    </div>
+							    
 
 							    <div class="col-12 mt-4">
 							    	<button type="submit" (click)="send()" class="btn btn-custom-primary w-100">Registrar</button>

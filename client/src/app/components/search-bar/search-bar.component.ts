@@ -7,6 +7,8 @@ import { environment } from './../../../environments/environment';
 
 import { ArticleService } from './../../services/article/article.service';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
@@ -20,6 +22,11 @@ export class SearchBarComponent implements OnInit {
   apiUrl = '';
   term = '';
   @Input() key = '';
+  @Input() dates = false;
+
+  dateStart = ''
+  dateEnd = '';
+  d = '';
 
 
   @Output() itemOutput = new EventEmitter<any>();
@@ -43,12 +50,34 @@ export class SearchBarComponent implements OnInit {
   }
 
   async onKey($event){
-
-    let response:any = await this._article.autocomplete(`${this.apiUrl}?keyword=${$event.target.value}`);
+    this.d = $event.target.value;
+    let response:any = await this._article.autocomplete(`${this.apiUrl}?keyword=${$event.target.value}&start=${this.dateStart}&end=${this.dateEnd}`);
     this.filteredOptions = response.data;
 
     this.itemOutput.emit(response)
 
+
+  }
+
+  async onChangeDate(type,$event){
+
+    let date = moment($event.value).format('YYYY-MM-DD');
+    
+    if (type == 'start') {
+      this.dateStart = date;
+    }else{
+      this.dateEnd = date;
+    }
+
+    console.log(this.dateStart,this.dateEnd)
+
+
+    let response:any = await this._article.autocomplete(`${this.apiUrl}?keyword=${this.d}&start=${this.dateStart}&end=${this.dateEnd}`);
+    this.filteredOptions = response.data;
+
+    this.itemOutput.emit(response)
+
+    
 
   }
 

@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
 	  this._auth.login(data).subscribe((response:any) => {
 	  	if (response.success) {
 	  		this._auth.setSession(response);
-	  		this._router.navigateByUrl("/");
+	  		this._router.navigateByUrl("/clients");
 	  	}else{
 	  		this._notify.error('Credenciales invalidas');
 	  	}

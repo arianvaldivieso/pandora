@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row" *ngIf="!slug">
 			<div class="col-12">
-				<app-search-bar [key]="'history'" *ngIf="articles" (itemOutput)="changeTerm($event)" [items]="articles"></app-search-bar>
+				<app-search-bar [dates]="true" [key]="'history'" *ngIf="articles" (itemOutput)="changeTerm($event)" [items]="articles"></app-search-bar>
 			</div>
 		</div>
 

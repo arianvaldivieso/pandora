@@ -21,7 +21,8 @@ export class ClientsComponent implements OnInit {
 		'cliente',
 		'tiempo',
 		'co2',
-		'descuento'
+		'descuento',
+    
 	];
 
   constructor(

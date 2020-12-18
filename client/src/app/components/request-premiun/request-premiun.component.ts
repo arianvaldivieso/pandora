@@ -8,6 +8,8 @@ import { ClientService } from './../../services/client/client.service';
 import { UserService } from './../../services/user/user.service';
 import { ArticleService } from './../../services/article/article.service';
 
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-request-premiun',
   templateUrl: './request-premiun.component.html',
@@ -23,18 +25,15 @@ export class RequestPremiunComponent implements OnInit {
   clients = [];
 
   config = {
-    displayKey: "referencia", // if objects array passed which key to be displayed defaults to description
+    displayKey: "reference", // if objects array passed which key to be displayed defaults to description
     search: true,
-    limitTo: 3,
+    limitTo: 10,
     searchPlaceholder: 'Buscar',
     placeholder: 'referencia'
   };
 
   references = [];
-  reference:any = {
-
-  	cantidad_stock: 100000000
-  };
+  reference:any = false;
 
   quantity;
   max:number;
@@ -45,7 +44,8 @@ export class RequestPremiunComponent implements OnInit {
   	private _client: ClientService,
   	private _user: UserService,
   	private _article: ArticleService,
-  	private _router: Router
+  	private _router: Router,
+  	private _notify: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -85,6 +85,13 @@ export class RequestPremiunComponent implements OnInit {
 	  return this.registerForm.get('client_id');
 	}
 
+
+	show = false;
+
+	selectionChanged($event){
+		this.show = true;
+	}
+
 	revert() {
 	  this.registerForm.reset();
 	}
@@ -110,19 +117,29 @@ export class RequestPremiunComponent implements OnInit {
 
 	async send(){
 		let data:any = {
-			reference: this.reference.referencia,
+			reference: this.reference.reference,
 			quantity: this.quantity
 		}
-		console.log(data)
-		if (data.reference != undefined && data.quantity != undefined) {
 
-			data = await this._article.sendRequest(data);
+		if (this.quantity > this.reference.cantidad_stock) {
+			this._notify.error('La cantidad solicitada no puede superar la cantidad en stock');
+		}else{
+			if (data.reference != undefined && data.quantity != undefined) {
+				data = await this._article.sendRequest(data);
+				this._notify.success('Solicitud registrada');
 
-			console.log(data)
+				setTimeout(() => {
+					this._router.navigateByUrl("/reload");
+				},300)
 
-			//this._router.navigateByUrl("/pandora");
+				
 
+			}else{
+				this._notify.error('Compruebe los datos');
+			}
 		}
+
+		
 
 		
 	}

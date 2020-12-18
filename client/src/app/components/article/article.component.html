@@ -9,6 +9,9 @@
 			<div class="image-article" *ngIf="article.image" [ngStyle]="{'background-image': 'url(' + article.image + ')'}"></div>
 			<div class="text-article">
 				<div class="page-article">Unidad: {{article.unit}}</div>
+				<div class="title-article" (click)="openArticle()" data-toggle="tooltip" data-placement="top" title="{{article.line}}">
+					{{article.line}}
+				</div>
 				<div class="title-article" (click)="openArticle()" data-toggle="tooltip" data-placement="top" title="{{article.reference}}">
 					{{article.reference}}
 				</div>
@@ -16,7 +19,7 @@
 					{{article.description}}
 				</div>
 				<div class="lenght-article" *ngIf="article.ubication"><span class="">Ubicación: {{article.ubication}}</span></div>
-				<div class="lenght-article"><span class="">Precio: {{article.unit_price | currency}}</span></div>
+				<div class="lenght-article"><span class="">Precio: {{ article.unit_price | currency : 'USD' : 'symbol' : '1.0-0' }}</span></div>
 				<div class="lenght-article" *ngIf="article.availability"><span class="">Cantidad: {{article.availability}} {{article.unit}}</span></div>
 				
 				<div class="lenght-article" *ngIf="article.garanty"><span class="">Garantia: ${{article.garanty}}</span></div>

@@ -65,6 +65,8 @@ Route::group([ 'middleware' => 'auth:api'], function() {
         'create', 'show'
     ]);
 
+    Route::post('users/delete', [ UserController::class,'delete']);
+
     Route::get('lines', [ AvailabilityController::class,'lines']);    
     Route::get('clients-2', [ AvailabilityController::class,'clients']);
     Route::get('articles', [ AvailabilityController::class,'articlesReferences']);
