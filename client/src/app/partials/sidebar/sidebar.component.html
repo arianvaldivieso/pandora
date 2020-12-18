@@ -13,7 +13,7 @@
 	<div id="menu" [ngClass]="{'hide-menu': false}">
 		<ul class="list-menu">
 
-			<li class="d-xl-none"><a mat-menu-item (click)="toggleMenu()"><img src="http://www.colsein.com.co/pandora/assets/images/x.png" alt="pandora" class="img-fluid" style="width: 25px;" ></a></li>
+			<li><a mat-menu-item (click)="toggleMenu()"><img src="http://www.colsein.com.co/pandora/assets/images/x.png" alt="pandora" class="img-fluid" style="width: 25px;" ></a></li>
 			<li class="d-xl-none"><a mat-menu-item [routerLink]="['/']">Mi pandora</a></li>
 			<li><a mat-menu-item [routerLink]="['/request']" mat-menu-item *ngIf="user.role != 'admin'">Solicitar productos</a></li>
 			<li class="d-xl-none"><a mat-menu-item [routerLink]="['/reload']">Recarga</a></li>
