@@ -7,6 +7,8 @@ import { AuthService } from './../../services/auth/auth.service';
 import { ClientService } from './../../services/client/client.service';
 import { UserService } from './../../services/user/user.service';
 import { ArticleService } from './../../services/article/article.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ConfirmComponent } from './../../dialogs/confirm-request/confirm-delete-user.component';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -45,7 +47,8 @@ export class RequestPremiunComponent implements OnInit {
   	private _user: UserService,
   	private _article: ArticleService,
   	private _router: Router,
-  	private _notify: ToastrService
+  	private _notify: ToastrService,
+  	public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -116,28 +119,43 @@ export class RequestPremiunComponent implements OnInit {
 	}
 
 	async send(){
-		let data:any = {
-			reference: this.reference.reference,
-			quantity: this.quantity
-		}
 
-		if (parseInt(this.quantity) > parseInt(this.reference.availability)) {
-			this._notify.error('La cantidad solicitada no puede superar la cantidad en stock');
-		}else{
-			if (data.reference != undefined && data.quantity != undefined) {
-				data = await this._article.sendRequest(data);
-				this._notify.success('Solicitud registrada');
+		const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '250px',
+    });
 
-				setTimeout(() => {
-					this._router.navigateByUrl("/reload");
-				},300)
+    dialogRef.afterClosed().subscribe(async (result) => {
+      
+      if (result) {
+        
+      	let data:any = {
+					reference: this.reference.reference,
+					quantity: this.quantity
+				}
 
-				
+				if (parseInt(this.quantity) > parseInt(this.reference.availability)) {
+					this._notify.error('La cantidad solicitada no puede superar la cantidad en stock');
+				}else{
+					if (data.reference != undefined && data.quantity != undefined) {
+						data = await this._article.sendRequest(data);
+						this._notify.success('Solicitud registrada');
 
-			}else{
-				this._notify.error('Compruebe los datos');
-			}
-		}
+						setTimeout(() => {
+							this._router.navigateByUrl("/reload");
+						},300)
+
+						
+
+					}else{
+						this._notify.error('Compruebe los datos');
+					}
+				}
+      
+        
+      }
+    });
+
+		
 
 		
 

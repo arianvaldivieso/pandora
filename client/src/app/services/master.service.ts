@@ -12,7 +12,7 @@ export class MasterService {
   constructor(
   	public _storage: StorageMap,
   	public _http: HttpClient,
-    private _notify: ToastrService
+    public _notify: ToastrService
   ) { 
 
   }

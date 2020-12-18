@@ -86,6 +86,7 @@ import { LinearChartComponent } from './components/linear-chart/linear-chart.com
 import { AreaChartComponent } from './components/area-chart/area-chart.component';
 import { RequestPremiunComponent } from './components/request-premiun/request-premiun.component';
 import { ConfirmDeleteUserComponent } from './dialogs/confirm-delete-user/confirm-delete-user.component';
+import { ConfirmComponent } from './dialogs/confirm-request/confirm-delete-user.component';
 
 
 
@@ -125,7 +126,8 @@ import { ConfirmDeleteUserComponent } from './dialogs/confirm-delete-user/confir
     LinearChartComponent,
     AreaChartComponent,
     RequestPremiunComponent,
-    ConfirmDeleteUserComponent
+    ConfirmDeleteUserComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
