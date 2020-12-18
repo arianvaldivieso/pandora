@@ -121,7 +121,7 @@ export class RequestPremiunComponent implements OnInit {
 			quantity: this.quantity
 		}
 
-		if (this.quantity > this.reference.cantidad_stock) {
+		if (parseInt(this.quantity) > parseInt(this.reference.cantidad_stock)) {
 			this._notify.error('La cantidad solicitada no puede superar la cantidad en stock');
 		}else{
 			if (data.reference != undefined && data.quantity != undefined) {
