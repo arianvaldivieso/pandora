@@ -4,12 +4,16 @@
 	<app-brand class="w-100"></app-brand>
 	-->
 
-	<a [routerLink]="['/']">
+	<!--<a [routerLink]="['/']">
 		<img src="http://www.colsein.com.co/pandora/assets/images/logo.png" alt="pandora" class="img-fluid w-100">
 	</a>
 
+-->
+
 	<div id="menu" [ngClass]="{'hide-menu': false}">
 		<ul class="list-menu">
+
+			<li class="d-xl-none"><img src="http://www.colsein.com.co/pandora/assets/images/menu.png" alt="pandora" class="img-fluid" style="width: 25px;" (click)="toggleMenu()"></li>
 			<li class="d-xl-none"><a mat-menu-item [routerLink]="['/']">Mi pandora</a></li>
 			<li class="d-xl-none"><a mat-menu-item [routerLink]="['/request']" mat-menu-item *ngIf="user.role != 'admin'">Solicitar productos</a></li>
 			<li class="d-xl-none"><a mat-menu-item [routerLink]="['/reload']">Recarga</a></li>
@@ -37,12 +41,6 @@
 	      </button>
       </li>
 
-      <li>
-      	<button mat-menu-item (click)="toggleMenu()">
-	        Cerrar menu
-	        
-	      </button>
-      </li>
       
 		</ul>
 	</div>
