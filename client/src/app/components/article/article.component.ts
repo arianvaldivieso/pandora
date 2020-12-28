@@ -28,6 +28,7 @@ export class ArticleComponent implements OnInit {
 	@Input() article;
   @Input() collections;
   @Input() user;
+  @Input() date = true;
   @Input() dialog:boolean = false;
 
   views = [];

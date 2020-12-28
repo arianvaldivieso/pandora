@@ -1,7 +1,7 @@
 <div class="article" [ngClass]="{'min-w':dialog}">
 	<div class="content-article">
 		<div class="header-article">
-			<div class="industry-article">{{article.date}}</div>
+			<div class="industry-article" *ngIf="date">{{article.date}}</div>
 
 		</div>
 
@@ -20,7 +20,7 @@
 				</div>
 				<div class="lenght-article" *ngIf="article.ubication"><span class="">Ubicación: {{article.ubication}}</span></div>
 				<div class="lenght-article"><span class="">Precio: {{ article.unit_price | currency : 'USD' : 'symbol' : '1.0-0' }}</span></div>
-				<div class="lenght-article" *ngIf="article.availability"><span class="">Cantidad: {{article.availability}} {{article.unit}}</span></div>
+				<div class="lenght-article" *ngIf="article.availability"><span class="">Cantidad <span *ngIf="!date">disponible</span>: {{article.availability}} {{article.unit}}</span></div>
 				
 				<div class="lenght-article" *ngIf="article.garanty"><span class="">Garantia: ${{article.garanty}}</span></div>
 			</div>

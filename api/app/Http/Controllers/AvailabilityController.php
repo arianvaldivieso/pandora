@@ -16,6 +16,22 @@ use Illuminate\Support\Facades\DB;
 class AvailabilityController extends Controller
 {
 
+    protected $months = [
+        'enero',
+        'febrero',
+        'marzo',
+        'abril',
+        'mayo',
+        'junio',
+        'julio',
+        'agosto',
+        'septiembre',
+        'octubre',
+        'noviembre',
+        'diciembre'
+    ];
+
+
     public function index()
     {
 
@@ -271,6 +287,11 @@ class AvailabilityController extends Controller
             $client = Client::find(auth()->user()->client_id);
             $history = History::select(DB::raw('linea as name,count(*) as value'))->where('cliente',$client->cliente)->groupBy('linea')->get();
         }
+
+        $history = $history->map(function($item){
+            $item->value = (float) $item->value;
+            return $item;
+        });
         
         return response()->json([
             'success' => true,
@@ -332,9 +353,16 @@ class AvailabilityController extends Controller
 
         $linear = $linear->get()->map(function($item){
             $item->name = explode('-',$item->name);
-            $item->name = $item->name[0].'-'.(isset($item->name[1])) ? $item->name[1] : '';
+
+            $item->name = $this->months[((int) $item->name[1]) - 1].'-'.$item->name[0];
+
+            //$item->name = $item->name[0].'-'.(isset($item->name[1])) ? $item->name[1] : '';
+
+            $item->value = (float) $item->value;
+
             return $item;
         });
+
 
         $linear2 =  History::select(
             DB::raw('sum(cantidad_comprada) as value'),
@@ -359,7 +387,9 @@ class AvailabilityController extends Controller
 
         $linear2 = $linear2->get()->map(function($item){
             $item->name = explode('-',$item->name);
-            $item->name = $item->name[0].'-'.(isset($item->name[1])) ? $item->name[1] : '';
+            $item->name = $this->months[((int) $item->name[1]) - 1].'-'.$item->name[0];
+            $item->value = (float) $item->value;
+            //$item->name = $item->name[0].'-'.(isset($item->name[1])) ? $item->name[1] : '';
             return $item;
         });
 
@@ -376,6 +406,14 @@ class AvailabilityController extends Controller
         }
 
 
+        $history = $history->get();
+
+
+        $history = $history->map(function($item){
+            $item->value = (float) $item->value;
+            return $item;
+        });
+
 
         return response()->json([
             'success' => true,
@@ -388,7 +426,7 @@ class AvailabilityController extends Controller
                     'name' => 'Cantidad de transacciones',
                     'series' => $linear2
                 ],
-                'area' => $history->get()
+                'area' => $history
             ]
         ]);
     }
