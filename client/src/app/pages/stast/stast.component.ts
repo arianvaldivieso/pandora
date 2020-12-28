@@ -30,7 +30,8 @@ export class StastComponent implements OnInit {
     search: true,
     limitTo: 3,
     searchPlaceholder: 'Buscar',
-    placeholder: 'cliente'
+    placeholder: 'cliente',
+    clearOnSelection:true
   };
 
   lines = [];
