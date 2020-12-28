@@ -49,8 +49,11 @@ export class SearchBarComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  async onKey($event){
-    this.d = $event.target.value;
+  async onKey($event:any = false){
+    if ($event) {
+      this.d = $event.target.value;
+    }
+    
     let response:any = await this._article.autocomplete(`${this.apiUrl}?keyword=${$event.target.value}&start=${this.dateStart}&end=${this.dateEnd}`);
     this.filteredOptions = response.data;
 
