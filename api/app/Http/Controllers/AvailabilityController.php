@@ -199,7 +199,14 @@ class AvailabilityController extends Controller
             $total = $history->count();
         }else{
             $client = Client::find(auth()->user()->client_id);
-            $history = History::where('cliente',$client->cliente)->where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%");
+
+            if ($key) {
+                $history = History::where('cliente',$client->cliente)->where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%");
+            }else{
+                $history = History::where('cliente',$client->cliente);
+            }
+
+            
             $total = $history->where('cliente',$client->cliente)->count();
         }
 
