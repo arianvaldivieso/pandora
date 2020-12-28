@@ -305,10 +305,10 @@ class AvailabilityController extends Controller
         
 
         if (auth()->user()->role == 'admin') {
-            $reload = Reload::select('linea')->groupBy('linea')->get();
+            $reload = History::select('linea')->groupBy('linea')->get();
         }else{
             $client = Client::find(auth()->user()->client_id);
-            $reload = Reload::select('linea')->where('cliente',$client->cliente)->groupBy('linea')->get();
+            $reload = History::select('linea')->where('cliente',$client->cliente)->groupBy('linea')->get();
         }
 
         return response()->json([
