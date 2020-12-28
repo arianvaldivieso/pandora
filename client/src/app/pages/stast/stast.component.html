@@ -42,13 +42,16 @@
 		</div>
 		<div class="row">
 			<div class="col-12 col-md-6" *ngIf="linear">
-				<app-linear-chart [data]="linear" [title]="'valor en compras'"></app-linear-chart>
+				<h3>Valor en compras</h3>
+				<app-linear-chart [data]="linear" [title]="''"></app-linear-chart>
 			</div>
 
 			<div class="col-12 col-md-6" *ngIf="linear2">
-				<app-linear-chart [data]="linear2" [title]="'cantidad de transacciones'"></app-linear-chart>
+				<h3>Cantidad de transacciones</h3>
+				<app-linear-chart [data]="linear2" [title]="''"></app-linear-chart>
 			</div>
 			<div class="col-12">
+				<h3>Segmentados por lineas</h3>
 				<app-area-chart [data]="area"></app-area-chart>
 			</div>
 		</div>
