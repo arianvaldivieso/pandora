@@ -210,7 +210,7 @@ class AvailabilityController extends Controller
 
         $total = $history->count();
 
-        $history = $history->get()->filter(function($item){
+        $history = $history->get()->filter(function($item) use($request){
 
             if ($request->start and $request->end){
 
