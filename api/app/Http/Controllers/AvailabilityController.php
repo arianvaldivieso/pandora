@@ -215,6 +215,8 @@ class AvailabilityController extends Controller
 
             $availability = Availability::where('referencia',$item->referencia);
 
+            $date = Carbon::parse($item->fecha_compra);
+
             $item = [
                 'id' => $item->id,
                 'reference' => $item->referencia,
@@ -237,7 +239,7 @@ class AvailabilityController extends Controller
 
                 $from = Carbon::parse($request->start);
                 $to = Carbon::parse($request->to);
-                $date = Carbon::parse($item->fecha_compra);
+                
                 if (
 
                     $date->lte($to) and $date->gte($from)
