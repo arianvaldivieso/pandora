@@ -213,6 +213,10 @@ class AvailabilityController extends Controller
 
         $total = $history->count();
 
+        echo "<pre>";
+        print_r ($total);
+        echo "</pre>";
+
         $history = $history->get()->map(function($item){
 
             $availability = Availability::where('referencia',$item->referencia);
