@@ -259,7 +259,7 @@ class AvailabilityController extends Controller
         return response()->json([
             'success' => true,
             'data' => $history,
-            'total' => count($history)
+            'total' => count($history->filter()->all())
         ]);
     }
 
