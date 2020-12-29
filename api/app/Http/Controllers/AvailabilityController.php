@@ -250,7 +250,6 @@ class AvailabilityController extends Controller
                     return false;
                 }
 
-
             }else{
                 return $item;
             }
