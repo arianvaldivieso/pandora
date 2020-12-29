@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 class AvailabilityController extends Controller
 {
@@ -258,7 +259,7 @@ class AvailabilityController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $history,
+            'data' => collect($history)->toAray(),
             'total' => count($history)
         ]);
     }
