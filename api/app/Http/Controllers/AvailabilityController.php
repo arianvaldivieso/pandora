@@ -212,16 +212,11 @@ class AvailabilityController extends Controller
 
         if ($request->start and $request->end){
 
+            $from = date($request->start);
+            $to = date($request->end);
 
-            $history = $history->whereBetween('fecha_compra', [$request->start, $request->end])->get();
-            $total = $history->count();
-
-            echo "<pre>";
-            print_r ($request->all());
-            echo "</pre>";
-
-
-            
+            $history = $history->whereBetween('fecha_compra', [$from, $to])->get();
+            $total = $history->count();            
 
         }else{
             $history = $history->get();
