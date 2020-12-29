@@ -19,75 +19,23 @@ const routes: Routes = [
 
 
   { 
-    path: 'users', component: LayoutComponent,
+    path: '', component: LayoutComponent,
 
     children: [
-      { path: '', component: UsersComponent},
-    ]
-
-  },
-
-  { 
-    path: 'stats', component: LayoutComponent,
-
-    children: [
-      { path: '', component: StastComponent},
-    ]
-
-  },
-
-  { 
-    path: 'clients', component: LayoutComponent,
-
-    children: [
-      { path: '', component: ClientsComponent},
-    ]
-
-  },
-	
-	{ 
-    path: 'pandora', component: LayoutComponent,
-
-    children: [
-      { path: '', component: DiscoverComponent},
-    ]
-
-  },
-  { 
-    path: 'history', component: LayoutComponent,
-
-    children: [
-      { path: '', component: HistoryComponent},
-    ]
-
-  },
-  { 
-    path: 'reload', component: LayoutComponent,
-    children: [
-      { path: '', component: ReloadComponent},
-    ]
-
-  },
-
-  { 
-    path: 'request', component: LayoutComponent,
-    children: [
-      { path: '', component: RequestPremiunComponent},
-    ]
-
-  },
- 
-
-  { 
-    path: 'users', component: LayoutComponent,
-    children: [
-        {
-          path: 'register',
+      { path: 'stast', component: StastComponent},
+      { path: 'users', component: UsersComponent},
+      { path: 'clients', component: ClientsComponent},
+      { path: 'pandora', component: DiscoverComponent},
+      { path: 'history', component: HistoryComponent},
+      { path: 'reload', component: ReloadComponent},
+      { path: 'request', component: RequestPremiunComponent},
+      {  path: 'users/register',
           component: RegisterComponent
         }
     ]
 
-  },  
+  },
+ 
 
 	{ path: 'login', component: LoginComponent },
   { path: '',   redirectTo: '/pandora', pathMatch: 'full' }
