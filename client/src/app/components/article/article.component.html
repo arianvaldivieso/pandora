@@ -22,7 +22,7 @@
 				<div class="lenght-article"><span class="">Precio: {{ article.unit_price | currency : 'USD' : 'symbol' : '1.0-0' }}</span></div>
 				<div class="lenght-article" *ngIf="article.availability"><span class="">Cantidad <span *ngIf="!date">disponible</span>: {{article.availability}} {{article.unit}}</span></div>
 				
-				<div class="lenght-article" *ngIf="article.garanty"><span class="">Garantia: ${{article.garanty}}</span></div>
+				<div class="lenght-article" *ngIf="article.garanty"><span class="">Garantía: {{article.garanty}}</span></div>
 			</div>
 		</div>
 
