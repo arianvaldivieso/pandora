@@ -336,6 +336,9 @@ class AvailabilityController extends Controller
 
     function filterStast(Request $request){
 
+
+        dd($request->all());
+
         $client = Client::find(auth()->user()->client_id);
         $linear =  History::select(
             DB::raw('sum(precio_unitario) as value'),
@@ -410,7 +413,7 @@ class AvailabilityController extends Controller
 
         if ($request->start and $request->end) {
 
-            dd($request->all());
+
             $history = $history->whereDate('fecha_compra', '>=', $request->start);
             $history = $history->whereDate('fecha_compra', '<=', $request->end);
 
