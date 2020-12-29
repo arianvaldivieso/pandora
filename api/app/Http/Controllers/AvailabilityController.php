@@ -195,7 +195,7 @@ class AvailabilityController extends Controller
         return response()->json([
             'success' => true,
             'data' => 2,
-            'total' => History::all()->count();
+            'total' => History::all()->count()
         ]);
 
         $key = $request->keyword; 
