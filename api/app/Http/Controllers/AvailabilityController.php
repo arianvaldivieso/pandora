@@ -217,9 +217,11 @@ class AvailabilityController extends Controller
             $history = $history->whereBetween('fecha_compra', [$from, $to])->get();
             $total = $history->count();    
 
-            echo "<pre>";
-                    print_r ($history->count());
-                    echo "</pre>";        
+            return response()->json([
+            'success' => true,
+            'data' => $history,
+            'total' => $total
+        ]);
 
         }else{
             $history = $history->get();
