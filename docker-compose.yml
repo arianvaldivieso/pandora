@@ -13,7 +13,7 @@ services:
       - 3307:3306
     volumes:
       - mydb-db-api:/var/lib/mysql
-  web:
+  web_pandora:
     restart: always
     tty: true
     image: jjuanrivvera99/ubuntu-apache-php-sqlserver
