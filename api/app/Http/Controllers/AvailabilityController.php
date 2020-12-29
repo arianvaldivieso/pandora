@@ -211,11 +211,14 @@ class AvailabilityController extends Controller
 
         }
 
+        return response()->json([
+            'success' => true,
+            'data' => 2,
+            'total' => $history->count() + 10
+        ]);
+
         $total = $history->count();
 
-        echo "<pre>";
-        print_r ($total);
-        echo "</pre>";
 
         $history = $history->get()->map(function($item){
 
