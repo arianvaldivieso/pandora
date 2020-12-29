@@ -214,21 +214,15 @@ class AvailabilityController extends Controller
 
             $from = date($request->start);
             $to = date($request->end);
-            $history = $history->whereBetween('fecha_compra', [$from, $to])->get();
+            $history = $history->whereBetween('fecha_compra', [$from, $to]);
             $total = $history->count();    
 
-            return response()->json([
-            'success' => true,
-            'data' => $history,
-            'total' => $total
-        ]);
-
         }else{
-            $history = $history->get();
+            $history = $history;
             $total = $history->count();
         }
 
-        $history = $history->map(function($item){
+        $history = $history->get()->map(function($item){
 
             $availability = Availability::where('referencia',$item->referencia);
 
