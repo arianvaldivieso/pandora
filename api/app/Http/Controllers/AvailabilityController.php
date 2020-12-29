@@ -9,6 +9,7 @@ use App\Models\Client;
 use App\Models\History;
 use App\Models\Reload;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -205,16 +206,34 @@ class AvailabilityController extends Controller
             $total = $history->where('cliente',$client->cliente)->count();
         }
 
-        if ($request->start and $request->end) {
 
-            $history = $history->whereDate('fecha_compra','>=',$request->start)
-                ->whereDate('fecha_compra','<=',$request->end);
-
-        }
 
         $total = $history->count();
 
-        $history = $history->get()->map(function($item){
+        $history = $history->get()->filter(function($item){
+
+            if ($request->start and $request->end){
+
+                $from = Carbon::parse($request->start);
+                $to = Carbon::parse($request->to);
+                $date = Carbon::parse($item->fecha_compra);
+                if (
+
+                    $date->lte($to) and $date->gte($from)
+
+                ) {
+                    return true;
+                }else{
+                    return false;
+                }
+
+
+            }else{
+                return true;
+            }
+
+
+        })->map(function($item){
 
             $availability = Availability::where('referencia',$item->referencia);
 
