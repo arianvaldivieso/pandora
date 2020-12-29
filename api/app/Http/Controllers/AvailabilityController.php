@@ -211,7 +211,6 @@ class AvailabilityController extends Controller
         }
 
         if ($request->start and $request->end){
-            dd('hola');
             $history = $history->whereBetween('fecha_compra', [$request->start, $request->end])->get();
         }else{
             $history = $history->get();
@@ -410,7 +409,9 @@ class AvailabilityController extends Controller
         }
 
         if ($request->start and $request->end) {
-            $history = $history->whereBetween('fecha_compra', [$request->start, $request->end]);
+            $history = $history->whereDate('fecha_compra', '>=', $request->start);
+            $history = $history->whereDate('fecha_compra', '<=', $request->end);
+
         }
 
 
