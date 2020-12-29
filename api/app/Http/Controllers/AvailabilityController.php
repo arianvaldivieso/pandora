@@ -192,6 +192,12 @@ class AvailabilityController extends Controller
     function autocompleteHistory(Request $request)
     {   
 
+        return response()->json([
+            'success' => true,
+            'data' => 2,
+            'total' => History::all()->count();
+        ]);
+
         $key = $request->keyword; 
 
         if (auth()->user()->role == 'admin') {
@@ -211,11 +217,7 @@ class AvailabilityController extends Controller
 
         }
 
-        return response()->json([
-            'success' => true,
-            'data' => 2,
-            'total' => $history->count() + 10
-        ]);
+        
 
         $total = $history->count();
 
