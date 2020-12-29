@@ -192,12 +192,6 @@ class AvailabilityController extends Controller
     function autocompleteHistory(Request $request)
     {   
 
-        return response()->json([
-            'success' => true,
-            'data' => 2,
-            'total' => History::all()->count()
-        ]);
-
         $key = $request->keyword; 
 
         if (auth()->user()->role == 'admin') {
@@ -213,14 +207,12 @@ class AvailabilityController extends Controller
 
         if ($request->start and $request->end) {
 
-            $history = $history->whereDate('fecha_compra','2021-12-01');
+            $history = $history->whereDate('fecha_compra','>=',$request->start)
+                ->whereDate('fecha_compra','<=',$request->end);
 
         }
 
-        
-
         $total = $history->count();
-
 
         $history = $history->get()->map(function($item){
 
