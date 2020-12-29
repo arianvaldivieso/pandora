@@ -213,6 +213,12 @@ class AvailabilityController extends Controller
         if ($request->start and $request->end){
             $history = $history->whereBetween('fecha_compra', [$request->start, $request->end])->get();
             $total = $history->count();
+
+
+            echo "<pre>";
+            print_r (count($history));
+            echo "</pre>";
+
         }else{
             $history = $history->get();
             $total = $history->count();
@@ -244,7 +250,7 @@ class AvailabilityController extends Controller
         return response()->json([
             'success' => true,
             'data' => $history,
-            'total' => count($history)
+            'total' => $total
         ]);
     }
 
