@@ -2,16 +2,12 @@
 
 	
 	<div class="row">
-
-		<ng-template *ngFor="let article of articles | paginate: { 
+		
+		<div class="col-xl-4 col-sm-12 col-12" *ngFor="let article of articles | paginate: { 
 			itemsPerPage: 6, currentPage: page,totalItems: total
 		}">
-			<div class="col-xl-4 col-sm-12 col-12" *ngIf="article">
-				<app-article [collections]="collections"  [article]="article"></app-article>
-			</div>
-		</ng-template>
-		
-		
+			<app-article [collections]="collections" *ngIf="article" [article]="article"></app-article>
+		</div>
 
 		<div class="col-12 mt-3">
 			<div class="d-flex justify-content-center">
