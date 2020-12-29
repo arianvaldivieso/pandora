@@ -211,34 +211,11 @@ class AvailabilityController extends Controller
 
         $total = $history->count();
 
-        $history = $history->get()->filter(function($item) use($request){
-
-            if ($request->start and $request->end){
-
-                $from = Carbon::parse($request->start);
-                $to = Carbon::parse($request->to);
-                $date = Carbon::parse($item->fecha_compra);
-                if (
-
-                    $date->lte($to) and $date->gte($from)
-
-                ) {
-                    return true;
-                }else{
-                    return false;
-                }
-
-
-            }else{
-                return true;
-            }
-
-
-        })->map(function($item){
+        $history = $history->get()->map(function($item) use ($request){
 
             $availability = Availability::where('referencia',$item->referencia);
 
-            return [
+            $item = [
                 'id' => $item->id,
                 'reference' => $item->referencia,
                 'description' => $item->descripcion,
@@ -255,11 +232,31 @@ class AvailabilityController extends Controller
                 'video' => $item->video,
                 'line' => $item->linea
             ];
+
+            if ($request->start and $request->end){
+
+                $from = Carbon::parse($request->start);
+                $to = Carbon::parse($request->to);
+                $date = Carbon::parse($item->fecha_compra);
+                if (
+
+                    $date->lte($to) and $date->gte($from)
+
+                ) {
+                    return $item;
+                }else{
+                    return false;
+                }
+
+
+            }else{
+                return $item;
+            }
         });
 
         return response()->json([
             'success' => true,
-            'data' => collect($history)->toArray(),
+            'data' => $history,
             'total' => count($history)
         ]);
     }
