@@ -211,6 +211,9 @@ class AvailabilityController extends Controller
         }
 
         if ($request->start and $request->end){
+            echo "<pre>";
+            print_r ($request->all());
+            echo "</pre>";
             $history = $history->whereDate('fecha_compra', $request->start)->get();
         }else{
             $history = $history->get();
