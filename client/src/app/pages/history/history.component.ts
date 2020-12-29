@@ -50,8 +50,11 @@ export class HistoryComponent implements OnInit {
     
     let response:any = await this._article.getHistory(this.filters,this.page);
     this.articles = response.data.filter((item:any) => {
-      return item;
+      return item != false;
     });
+
+    console.log(this.articles);
+
     this.total = response.total;
   }
 
