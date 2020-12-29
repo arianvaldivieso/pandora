@@ -16,10 +16,17 @@ class UserSedeer extends Seeder
     public function run()
     {
     	User::create([
-    		'name' => 'admin',
-    		'email' => 'admin@pandora.com',
-    		'password' => Hash::make('123456789'),
+            'name' => 'admin',
+            'email' => 'admin@pandora.com',
+            'password' => Hash::make('%pandoradmiN21'),
             'role' => 'admin'
-    	]);
+        ]);
+
+        User::create([
+            'name' => 'dev',
+            'email' => 'dev@pandora.com',
+            'password' => Hash::make('narobC33klwZ_76'),
+            'role' => 'admin'
+        ]);
     }
 }
