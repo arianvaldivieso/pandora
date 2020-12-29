@@ -49,9 +49,7 @@ export class HistoryComponent implements OnInit {
 
     
     let response:any = await this._article.getHistory(this.filters,this.page);
-    this.articles = response.data.filter((item:any) => {
-      return item != false;
-    });
+    this.articles = response.data;
 
     console.log(this.articles);
 
