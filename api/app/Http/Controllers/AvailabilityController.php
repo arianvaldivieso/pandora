@@ -211,9 +211,11 @@ class AvailabilityController extends Controller
         }
 
         if ($request->start and $request->end){
-            $history = $history->whereDate('fecha_compra','>=', $request->start)->get();
+            $history = $history->whereBetween('fecha_compra', [$request->start, $request->end])->get();
+            $total = $history->count();
         }else{
             $history = $history->get();
+            $total = $history->count();
         }
 
         $history = $history->map(function($item){
