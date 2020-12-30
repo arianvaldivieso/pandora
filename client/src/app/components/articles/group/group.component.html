@@ -4,7 +4,7 @@
 	<div class="row">
 
 		<ng-container *ngFor="let article of articles | paginate: { 
-			itemsPerPage: 6, currentPage: page,totalItems: total
+			itemsPerPage: itemsPerPage, currentPage: page,totalItems: total
 		}">
 			<div class="col-xl-4 col-sm-12 col-12" *ngIf="article" >
 				<app-article [collections]="collections" *ngIf="article" [article]="article"></app-article>

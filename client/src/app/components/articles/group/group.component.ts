@@ -14,6 +14,7 @@ export class GroupComponent implements OnInit {
   @Input() page = 1;
   @Input() total = 0;
   @Input() collections = [];
+  @Input() itemsPerPage = 6;
 
 	@Output() pagination = new EventEmitter<any>();
 
