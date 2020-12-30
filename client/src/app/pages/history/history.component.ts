@@ -24,6 +24,7 @@ export class HistoryComponent implements OnInit {
   collectionId:any = false;
   collaborator:any = false;
   total:0;
+  total_2 = 0;
 
   private filters:any = {};
   collaborators:any;
@@ -51,9 +52,8 @@ export class HistoryComponent implements OnInit {
     let response:any = await this._article.getHistory(this.filters,this.page);
     this.articles = response.data;
 
-    console.log(this.articles);
-
     this.total = response.total;
+    this.total_2 = 6;
   }
 
 
@@ -82,6 +82,7 @@ export class HistoryComponent implements OnInit {
     this.articles = $event.data;
     this.total = $event.total;
     this.page = 1;
+    this.total_2 = this.total;
   }
 
 }
