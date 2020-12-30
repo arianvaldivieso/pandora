@@ -194,19 +194,37 @@ class AvailabilityController extends Controller
     function autocompleteHistory(Request $request)
     {   
 
-        $key = $request->keyword; 
+        $key = $request->keyword;
 
         if (auth()->user()->role == 'admin') {
-            $history = History::where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%");
+
+            if ($key != null) {
+                $history = History::where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%");
+            }else{
+                $history = new History();
+            }
+
+            
             $total = $history->count();
         }else{
             $client = Client::find(auth()->user()->client_id);
 
-            $history = History::where('cliente',$client->cliente)->where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%");
+            if ($key != null) {
+                $history = History::where('cliente',$client->cliente)->where('referencia','like',"%$key%")->orWhere('linea','like',"%$key%");
+            }else{
+                $history = History::where('cliente',$client->cliente);
+            }
+
+            
 
             $total = $history->where('cliente',$client->cliente)->count();
         }
 
+        if ($request->start and $request->end) {
+            //dd([new Carbon($request->start), new Carbon($request->end)]);
+            $history =$history->whereBetween('fecha_compra', [Carbon::parse($request->start), Carbon::parse($request->end)]);
+            
+        }
 
 
         $total = $history->count();
@@ -235,24 +253,9 @@ class AvailabilityController extends Controller
                 'line' => $item->linea
             ];
 
-            if ($request->start and $request->end){
+            return $item;
 
-                $from = Carbon::parse($request->start);
-                $to = Carbon::parse($request->to);
-                
-                if (
-
-                    $date->lte($to) and $date->gte($from)
-
-                ) {
-                    return $item;
-                }else{
-                    return false;
-                }
-
-            }else{
-                return $item;
-            }
+           
         });
 
         return response()->json([
