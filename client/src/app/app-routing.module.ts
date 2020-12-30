@@ -22,7 +22,7 @@ const routes: Routes = [
     path: '', component: LayoutComponent,
 
     children: [
-      { path: 'stast', component: StastComponent},
+      { path: 'stats', component: StastComponent},
       { path: 'users', component: UsersComponent},
       { path: 'clients', component: ClientsComponent},
       { path: 'pandora', component: DiscoverComponent},
